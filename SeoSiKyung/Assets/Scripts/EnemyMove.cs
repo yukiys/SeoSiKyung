@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
@@ -7,9 +8,23 @@ public class EnemyMove : MonoBehaviour
     Collider2D cd;
     Transform player;
     Animator anim;
+
+    public string name;
+    private int currentHP;
+    private List<string> resistances;
     public float speed = 2f;
     private bool isAwake = false;
     private bool isMoving = false;
+
+    void Start()
+    {
+        EnemyData data = GameManager.instance.GetEnemyData(name);
+        if (data != null)
+        {
+            currentHP = data.maxHP;
+            resistances = data.resistances;
+        }
+    }
 
     void Awake()
     {
