@@ -5,6 +5,10 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     private Rigidbody2D rb;
+    private Animator animator;
+
+    private SpriteRenderer sr;
+
 
     private int jumpCount = 0;
     private int maxJumps = 2;
@@ -13,14 +17,16 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
-    {
+    {   
         float moveX = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
-
-        // 점프 조건: (첫 점프는 땅에서, 두 번째는 공중에서만)
+        sr.flipX = moveX<0 ;
+        animator.SetBool("IsRunning", moveX != 0);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded)
