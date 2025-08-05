@@ -22,7 +22,14 @@ public class EnemyMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isAwake && isMoving && player != null)
+        if (!isAwake)
+        {
+            anim.Play("Sleep");
+            rd.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        if (isMoving && player != null)
         {
             Vector2 direction = (player.position - transform.position).normalized;
             rd.linearVelocity = speed * direction;
@@ -38,7 +45,7 @@ public class EnemyMove : MonoBehaviour
 
     public void OnHit()
     {
-        anim.SetBool("isHit", true);
+        anim.SetTrigger("HitTrigger");
     }
 
     public void WakeUp()
