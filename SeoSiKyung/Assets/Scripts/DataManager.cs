@@ -7,7 +7,7 @@ public class DataManager : MonoBehaviour
 
     void Start()
     {
-        path = Path.Combine(Application.dataPath, "enemy_data.json");
+        path = Path.Combine(Application.dataPath, "DataSet/enemy_data.json");
         LoadEnemyData();
     }
 
@@ -20,11 +20,11 @@ public class DataManager : MonoBehaviour
         }
 
         string json = File.ReadAllText(path);
-        EnemyDataList enemyDataList = JsonUtility.FromJson<EnemyDataList>(json);
+        EnemyDataList data = JsonUtility.FromJson<EnemyDataList>(json);
 
-        if (enemyDataList != null && enemyDataList.enemies != null)
+        if (data != null && data.enemies != null)
         {
-            GameManager.instance.EnemyDataList = enemyDataList.enemies;
+            GameManager.instance.EnemyDataList = data.enemies;
             Debug.Log("load 완료");
         }
     }
