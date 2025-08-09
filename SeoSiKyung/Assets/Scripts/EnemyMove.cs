@@ -9,7 +9,7 @@ public class EnemyMove : MonoBehaviour
     Transform player;
     Animator anim;
 
-    public string name;
+    public string enemyName;
     private int currentHP;
     private List<string> resistances;
     public float speed = 2f;
@@ -18,10 +18,10 @@ public class EnemyMove : MonoBehaviour
 
     void Start()
     {
-        EnemyData data = GameManager.instance.GetEnemyData(name);
+        DataSet.EnemyData data = GameManager.instance.GetEnemyData(name);
         if (data != null)
         {
-            currentHP = data.maxHP;
+            currentHP = data.maxHp;
             resistances = data.resistances;
         }
     }
