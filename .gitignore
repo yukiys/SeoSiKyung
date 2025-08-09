@@ -27,7 +27,7 @@
 **/[Aa]ssets/Plugins/Editor/JetBrains*
 projectSettingsUpdator.xml
 
-workspace.xml
+.idea/workspace.xml
 default-6000.dwlt
 
 # Visual Studio cache directory
