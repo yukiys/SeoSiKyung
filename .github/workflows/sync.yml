@@ -1,0 +1,52 @@
+name: Sync fork with upstream
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream & fetch
+        run: |
+          git remote add upstream https://github.com/Hongmin010/SeoSiKyung.git
+          git fetch upstream --prune --tags
+          git fetch origin --prune
+
+      - name: Sync all branches (fast-forward only)
+        shell: bash
+        run: |
+          mapfile -t BRANCHES < <(git for-each-ref --format='%(refname:strip=3)' refs/remotes/upstream/)
+          for BR in "${BRANCHES[@]}"; do
+            echo "==> Syncing branch: $BR"
+            if git rev-parse --verify origin/${BR} >/dev/null 2>&1; then
+              git checkout ${BR} || git checkout -b ${BR} origin/${BR}
+            else
+              git checkout -t upstream/${BR} || git checkout -b ${BR} upstream/${BR}
+            fi
+            if git merge --ff-only upstream/${BR}; then
+              git push origin ${BR}
+            else
+              echo "⚠️ Non fast-forward on ${BR}. Skipping."
+              git reset --hard
+            fi
+          done
+
+      - name: Sync tags
+        run: |
+          git push origin --tags
