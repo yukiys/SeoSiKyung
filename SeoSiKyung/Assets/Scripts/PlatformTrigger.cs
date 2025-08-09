@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour
 {
-    public List<EnemyMove> enemies=new List<EnemyMove>();
+    public List<Enemy> enemies=new List<Enemy>();
     Collider2D cd;
 
     void Awake()
@@ -22,7 +22,7 @@ public class PlatformTrigger : MonoBehaviour
         enemies.Clear();
         foreach (var t in tracked)
         {
-            EnemyMove enemy = t.GetComponent<EnemyMove>();
+            Enemy enemy = t.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemies.Add(enemy);
