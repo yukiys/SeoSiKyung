@@ -4,7 +4,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public List<EnemyData> EnemyDataList = new List<EnemyData>();
+    public List<DataSet.EnemyData> enemyDataList = new List<DataSet.EnemyData>();
+    public List<DataSet.WeaponData> weaponDataList = new List<DataSet.WeaponData>();
 
     public int health;
     public PlayerMove player;
@@ -14,9 +15,9 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    public EnemyData GetEnemyData(string Name)
+    public DataSet.EnemyData GetEnemyData(string enemyName)
     {
-        return EnemyDataList.Find(e => e.name == Name);
+        return enemyDataList.Find(e => e.enemyName == enemyName);
     }
 
     public void HealthDown(int h)

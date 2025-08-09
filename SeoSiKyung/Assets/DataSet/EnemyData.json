@@ -1,0 +1,27 @@
+{
+    "enemies":
+    [
+        {
+            "enemyName": "Golem",
+            "resistances": ["Slash","Fire","Ice"],
+            "maxHp": 5,
+            "isRanged": 0,
+            "attackRange": [-30, 100, 50, 0],
+            
+            "title": "초기형 골렘",
+            "description": ["골렘의 기본 형태"],
+            "gimmickNumber": 6,
+            "gimmick": ["타격: 산산조각 나 사라진다.","관통: 잔해가 남아 밟고 올라갈 수 있다."]
+        },
+        {
+            "name":"Slime",
+            "maxHP":2,
+            "resistances":["Bludgeon"]
+        },
+        {
+            "name":"Goblin",
+            "maxHP":2,
+            "resistances":[]
+        }
+    ]
+}
