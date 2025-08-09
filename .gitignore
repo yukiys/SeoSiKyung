@@ -27,8 +27,12 @@
 **/[Aa]ssets/Plugins/Editor/JetBrains*
 projectSettingsUpdator.xml
 
-.idea/workspace.xml
-default-6000.dwlt
+# Rider
+**/.idea/**
+
+# Unity 사용자 레이아웃/설정
+**/UserSettings/**
+**/*.dwlt
 
 # Visual Studio cache directory
 .vs/
