@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour
     private int maxJumps = 2;
     private bool isGrounded;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
