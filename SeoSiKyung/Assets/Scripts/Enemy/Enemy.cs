@@ -17,9 +17,15 @@ public class Enemy : MonoBehaviour
 
     public EnemyFSM fsm { get; set; }
     public EnemySleepState SleepState { get; set; }
+    public EnemySleepDie1 SleepDie1 { get; set; }
+    public EnemySleepDie2 SleepDie2 { get; set; }
+    public EnemyAwakeState AwakeState { get; set; }
+    public EnemyAwakeDie1 AwakeDie1 { get; set; }
+    public EnemyAwakeDie2 AwakeDie2 { get; set; }
     public EnemyIdleState IdleState { get; set; }
     public EnemyPatrolState PatrolState { get; set; }
     public EnemyTraceState TraceState { get; set; }
+    public EnemyAtackState AtackState { get; set; }
 
     void Awake()
     {
@@ -31,17 +37,23 @@ public class Enemy : MonoBehaviour
 
         fsm = new EnemyFSM();
         SleepState = new EnemySleepState(this, fsm);
+        SleepDie1 = new EnemySleepDie1(this, fsm);
+        SleepDie2 = new EnemySleepDie2(this, fsm);
+        AwakeState = new EnemyAwakeState(this, fsm);
+        AwakeDie1 = new EnemyAwakeDie1(this, fsm);
+        AwakeDie2 = new EnemyAwakeDie2(this, fsm);
         IdleState = new EnemyIdleState(this, fsm);
         PatrolState = new EnemyPatrolState(this, fsm);
         TraceState = new EnemyTraceState(this, fsm);
+        AtackState = new EnemyAtackState(this, fsm);
     }
 
     void Start()
     {
-        EnemyData data = GameManager.instance.GetEnemyData(enemyName);
+        DataSet.EnemyData data = GameManager.instance.GetEnemyData(enemyName);
         if (data != null)
         {
-            currentHP = data.maxHP;
+            currentHP = data.maxHp;
             resistances = data.resistances;
         }
 

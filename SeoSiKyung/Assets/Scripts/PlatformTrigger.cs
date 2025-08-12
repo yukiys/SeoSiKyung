@@ -16,6 +16,7 @@ public class PlatformTrigger : MonoBehaviour
     private void FindEnemies()
     {
         Bounds bounds = cd.bounds;
+        bounds.Expand(0.5f);
 
         Collider2D[] tracked = Physics2D.OverlapBoxAll(bounds.center, bounds.size, 0f);
 
@@ -30,9 +31,9 @@ public class PlatformTrigger : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.collider.CompareTag("Player"))
         {
             foreach (var e in enemies)
             {
