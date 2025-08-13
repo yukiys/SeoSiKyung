@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     public int   maxJumps  = 2;
+    public float fireForce = 10f;
 
     [Header("Ground Check")]
     public LayerMask groundMask;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     [Header("Optional")]
     public Animator animator;
     public SpriteRenderer sr;
+    public GameObject fbobject;
 
     // 데드존
     public const float INPUT_EPS = 0.05f;
@@ -36,20 +38,22 @@ public class Player : MonoBehaviour
     public PlayerIdleState  idle;
     public PlayerMoveState  move;
     public PlayerJumpState  jump;
+    public PlayerAttackState attack;
 
     void Awake()
     {
-        rb  = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         if (!sr) sr = GetComponent<SpriteRenderer>();
 
         rb.freezeRotation = true;
-        rb.interpolation  = RigidbodyInterpolation2D.Interpolate;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
-        fsm  = new PlayerStateMachine();
+        fsm = new PlayerStateMachine();
         idle = new PlayerIdleState(this, fsm);
         move = new PlayerMoveState(this, fsm);
         jump = new PlayerJumpState(this, fsm);
+        attack = new PlayerAttackState(this, fsm);
     }
 
     void OnEnable() => fsm.ChangeState(idle);
@@ -60,7 +64,7 @@ public class Player : MonoBehaviour
         jumpDown = Input.GetKeyDown(KeyCode.Space);
         jumpUp   = Input.GetKeyUp(KeyCode.Space);
 
-        if (sr && Mathf.Abs(inputX) > 0.001f) sr.flipX = inputX < 0;
+        if (sr!=null && Mathf.Abs(inputX) > 0.001f) sr.flipX = inputX < 0;
 
         fsm.Tick();
         jumpDown = false; // 일회성 입력 리셋
@@ -93,7 +97,13 @@ public class Player : MonoBehaviour
         if (!grounded) jumpCount = maxJumps;
         else jumpCount++;
     }
-
+    public void Shoot()
+    {
+        GameObject fireball = Instantiate(fbobject, transform.position, transform.rotation);
+        Rigidbody2D rd = fireball.GetComponent<Rigidbody2D>();
+        Vector2 dir = (sr != null && sr.flipX) ? Vector2.left : Vector2.right;
+        rb.AddForce(dir * fireForce, ForceMode2D.Impulse); 
+    }
     public void SetRun(bool on)
     {
         if(animator!=null)animator.SetBool("IsRunning", on);
