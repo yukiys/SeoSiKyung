@@ -597,7 +597,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 7
   maxJumps: 2
-  fireForce: 10
+  fireForce: 5
   groundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -606,7 +606,9 @@ MonoBehaviour:
   animator: {fileID: 1292558051}
   sr: {fileID: 0}
   fbobject: {fileID: 6030717079205536593, guid: 968e3ef2950e62245bf9af7f952db8f0, type: 3}
+  fbCooltime: 1
   inputX: 0
+  attackDown: 0
   jumpDown: 0
   jumpUp: 0
   grounded: 0

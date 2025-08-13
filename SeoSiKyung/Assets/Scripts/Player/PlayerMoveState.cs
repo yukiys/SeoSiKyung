@@ -18,6 +18,8 @@ public class PlayerMoveState : PlayerState
 
         if (player.jumpCount < player.maxJumps && player.jumpDown)
         { fsm.ChangeState(player.jump); }
+        if (player.attackDown && player.OnCooltime()) { fsm.ChangeState(player.attack); return; }
+
     }
 
     public override void FixedTick()

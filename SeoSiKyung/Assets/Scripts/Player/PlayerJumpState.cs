@@ -11,7 +11,9 @@ public class PlayerJumpState : PlayerState
     }
 
     public override void Tick()
-    {
+    {   
+         if (player.attackDown && player.OnCooltime()) { fsm.ChangeState(player.attack); return; }
+
         // 가변 점프: 키 떼면 상승 감쇠
         if (player.jumpUp && rb.linearVelocity.y > 0f)
         {
