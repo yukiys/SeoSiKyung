@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public List<DataSet.WeaponData> weaponDataList = new List<DataSet.WeaponData>();
 
     public int health;
-    public PlayerMove player;
+    public Player player;
 
     void Awake()
     {

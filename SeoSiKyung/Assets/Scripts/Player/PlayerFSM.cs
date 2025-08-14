@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public sealed class PlayerStateMachine
+public sealed class PlayerFSM
 {
-    public PlayerState Current { get; private set; }
+    public PlayerState Current { get; set; }
 
     public void ChangeState(PlayerState next)
     {

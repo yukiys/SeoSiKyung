@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerIdleState : PlayerState
+public class Idle_Player : PlayerState
 {
-    public PlayerIdleState(Player p, PlayerStateMachine m) : base(p, m) { }
+    public Idle_Player(Player p, PlayerFSM m) : base(p, m) { }
 
     public override void Enter()
     {

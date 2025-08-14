@@ -38,11 +38,11 @@ public class Player : MonoBehaviour
     [HideInInspector] public int   jumpCount;
 
     // FSM
-    public PlayerStateMachine fsm { get; private set; }
-    public PlayerIdleState  idle;
-    public PlayerMoveState  move;
-    public PlayerJumpState  jump;
-    public PlayerAttackState attack;
+    public PlayerFSM fsm { get; private set; }
+    public Idle_Player  idle;
+    public Move_Player  move;
+    public Jump_Player  jump;
+    public Attack_Player attack;
 
     void Awake()
     {
@@ -53,11 +53,11 @@ public class Player : MonoBehaviour
         rb.freezeRotation = true;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
-        fsm = new PlayerStateMachine();
-        idle = new PlayerIdleState(this, fsm);
-        move = new PlayerMoveState(this, fsm);
-        jump = new PlayerJumpState(this, fsm);
-        attack = new PlayerAttackState(this, fsm);
+        fsm = new PlayerFSM();
+        idle = new Idle_Player(this, fsm);
+        move = new Move_Player(this, fsm);
+        jump = new Jump_Player(this, fsm);
+        attack = new Attack_Player(this, fsm);
     }
 
     void OnEnable() => fsm.ChangeState(idle);

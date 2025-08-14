@@ -3,13 +3,13 @@ using UnityEngine;
 public abstract class PlayerState
 {
     protected readonly Player player;
-    protected readonly PlayerStateMachine fsm;
+    protected readonly PlayerFSM fsm;
     protected readonly Rigidbody2D rb;
 
     protected float stateTimer;
     protected bool animTrigger;
 
-    protected PlayerState(Player p, PlayerStateMachine m)
+    protected PlayerState(Player p, PlayerFSM m)
     { player = p; fsm = m; rb = p.rb; }
 
     public virtual void Enter() { animTrigger = false; }

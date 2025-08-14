@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerMoveState : PlayerState
+public class Move_Player : PlayerState
 {
-    public PlayerMoveState(Player p, PlayerStateMachine m) : base(p, m) { }
+    public Move_Player(Player p, PlayerFSM m) : base(p, m) { }
 
     public override void Enter()
     {
