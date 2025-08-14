@@ -18,7 +18,10 @@ public class Player : MonoBehaviour
     public Animator animator;
     public SpriteRenderer sr;
     public GameObject fbobject;
+    [Header("Cooldown")]
+    public float fbCooltime;
 
+    float Curtime;
     // 데드존
     public const float INPUT_EPS = 0.05f;
     public const float SPEED_EPS = 0.05f;
@@ -29,6 +32,7 @@ public class Player : MonoBehaviour
 
     // 입력/상태 공유
     [HideInInspector] public float inputX;
+    [HideInInspector] public bool attackDown;
     [HideInInspector] public bool  jumpDown, jumpUp;
     [HideInInspector] public bool  grounded;
     [HideInInspector] public int   jumpCount;
@@ -60,14 +64,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        inputX   = Input.GetAxisRaw("Horizontal");
+        inputX = Input.GetAxisRaw("Horizontal");
         jumpDown = Input.GetKeyDown(KeyCode.Space);
-        jumpUp   = Input.GetKeyUp(KeyCode.Space);
-
-        if (sr!=null && Mathf.Abs(inputX) > 0.001f) sr.flipX = inputX < 0;
-
+        jumpUp = Input.GetKeyUp(KeyCode.Space);
+        attackDown = Input.GetKeyDown(KeyCode.LeftControl);
+        if (sr != null && Mathf.Abs(inputX) > 0.001f) sr.flipX = inputX < 0;
+        timereading();
         fsm.Tick();
-        jumpDown = false; // 일회성 입력 리셋
+        jumpDown = false;
+        attackDown = false; // 일회성 입력 리셋
     }
 
     void FixedUpdate()
@@ -97,12 +102,23 @@ public class Player : MonoBehaviour
         if (!grounded) jumpCount = maxJumps;
         else jumpCount++;
     }
+    public void timereading()
+    {
+        Curtime += Time.deltaTime;
+    }
+    public bool OnCooltime()
+    {
+        if (Curtime < fbCooltime) return false;
+        else return true;
+    }
     public void Shoot()
     {
-        GameObject fireball = Instantiate(fbobject, transform.position, transform.rotation);
+        if (!OnCooltime()) return;
+        GameObject fireball = Instantiate(fbobject, transform.position,transform.rotation);
         Rigidbody2D rd = fireball.GetComponent<Rigidbody2D>();
         Vector2 dir = (sr != null && sr.flipX) ? Vector2.left : Vector2.right;
-        rb.AddForce(dir * fireForce, ForceMode2D.Impulse); 
+        rd.AddForce(dir * fireForce, ForceMode2D.Impulse);
+        Curtime = 0;
     }
     public void SetRun(bool on)
     {
