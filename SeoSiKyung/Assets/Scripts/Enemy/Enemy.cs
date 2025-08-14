@@ -18,16 +18,16 @@ public class Enemy : MonoBehaviour
 
 
     public EnemyFSM fsm { get; set; }
-    public EnemySleepState SleepState { get; set; }
-    public EnemySleepDie1 SleepDie1 { get; set; }
-    public EnemySleepDie2 SleepDie2 { get; set; }
-    public EnemyAwakeState AwakeState { get; set; }
-    public EnemyAwakeDie1 AwakeDie1 { get; set; }
-    public EnemyAwakeDie2 AwakeDie2 { get; set; }
-    public EnemyIdleState IdleState { get; set; }
-    public EnemyPatrolState PatrolState { get; set; }
-    public EnemyTraceState TraceState { get; set; }
-    public EnemyAttackState AttackState { get; set; }
+    public Sleep_Enemy SleepState { get; set; }
+    public Pierce_SleepEnemy Pierce_Sleep { get; set; }
+    public Bludgeon_SleepEnemy Bludgeon_Sleep { get; set; }
+    public Awake_Enemy AwakeState { get; set; }
+    public Bludgeon_Enemy Bludgeon { get; set; }
+    public Pierce_Enemy Pierce { get; set; }
+    public Idle_Enemy IdleState { get; set; }
+    public Patrol_Enemy PatrolState { get; set; }
+    public Trace_Enemy TraceState { get; set; }
+    public Attack_Enemy AttackState { get; set; }
 
     void Awake()
     {
@@ -38,16 +38,16 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
 
         fsm = new EnemyFSM();
-        SleepState = new EnemySleepState(this, fsm);
-        SleepDie1 = new EnemySleepDie1(this, fsm);
-        SleepDie2 = new EnemySleepDie2(this, fsm);
-        AwakeState = new EnemyAwakeState(this, fsm);
-        AwakeDie1 = new EnemyAwakeDie1(this, fsm);
-        AwakeDie2 = new EnemyAwakeDie2(this, fsm);
-        IdleState = new EnemyIdleState(this, fsm);
-        PatrolState = new EnemyPatrolState(this, fsm);
-        TraceState = new EnemyTraceState(this, fsm);
-        AttackState = new EnemyAttackState(this, fsm);
+        SleepState = new Sleep_Enemy(this, fsm);
+        Pierce_Sleep = new Pierce_SleepEnemy(this, fsm);
+        Bludgeon_Sleep = new Bludgeon_SleepEnemy(this, fsm);
+        AwakeState = new Awake_Enemy(this, fsm);
+        Bludgeon = new Bludgeon_Enemy(this, fsm);
+        Pierce = new Pierce_Enemy(this, fsm);
+        IdleState = new Idle_Enemy(this, fsm);
+        PatrolState = new Patrol_Enemy(this, fsm);
+        TraceState = new Trace_Enemy(this, fsm);
+        AttackState = new Attack_Enemy(this, fsm);
     }
 
     void Start()

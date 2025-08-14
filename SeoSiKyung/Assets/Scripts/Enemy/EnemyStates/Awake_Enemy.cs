@@ -1,10 +1,10 @@
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 
-public class EnemyAwakeState : EnemyState
+public class Awake_Enemy : EnemyState
 {
     float t, duration = 0.7f;
-    public EnemyAwakeState(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+    public Awake_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {

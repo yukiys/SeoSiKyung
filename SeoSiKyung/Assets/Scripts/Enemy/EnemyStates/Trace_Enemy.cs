@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class EnemyTraceState : EnemyState
+public class Trace_Enemy : EnemyState
 {
-    public EnemyTraceState(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+    public Trace_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {

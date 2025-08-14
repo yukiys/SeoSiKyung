@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class EnemyIdleState : EnemyState
+public class Idle_Enemy : EnemyState
 {
     float idleMin = 0.8f;
     float idleMax = 1.6f;
     float timer;
-    public EnemyIdleState(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+    public Idle_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {

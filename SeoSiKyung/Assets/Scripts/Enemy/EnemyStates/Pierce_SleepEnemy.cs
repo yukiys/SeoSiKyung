@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class EnemyAwakeDie2 : EnemyState
+public class Pierce_SleepEnemy : EnemyState
 {
-    float t, duration;
-
-    public EnemyAwakeDie2(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+    float t, duration = 0.7f;
+    
+    public Pierce_SleepEnemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {
         enemy.rd.linearVelocity = Vector2.zero;
-        enemy.anim.Play("AwakeDie2");
+        enemy.anim.Play("SleepDie1");
         t = duration;
     }
 

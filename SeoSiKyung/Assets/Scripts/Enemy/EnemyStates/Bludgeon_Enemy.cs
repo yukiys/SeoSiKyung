@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class EnemyAwakeDie1 : EnemyState
+public class Bludgeon_Enemy : EnemyState
 {
     float t, duration = 0.7f;
     
-    public EnemyAwakeDie1(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+    public Bludgeon_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {

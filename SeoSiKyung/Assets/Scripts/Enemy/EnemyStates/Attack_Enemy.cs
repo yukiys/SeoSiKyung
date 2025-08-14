@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class EnemyAttackState : EnemyState
+public class Attack_Enemy : EnemyState
 {
-    public EnemyAttackState(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+    public Attack_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {

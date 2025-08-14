@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class EnemyPatrolState : EnemyState
+public class Patrol_Enemy : EnemyState
 {
     float patrolMin = 1.5f;
     float patrolMax = 3.0f;
     float timer;
     int dir;
 
-    public EnemyPatrolState(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+    public Patrol_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {
