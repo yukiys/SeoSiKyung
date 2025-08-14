@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class Pierce_SleepEnemy : EnemyState
 {
-    float t, duration = 0.7f;
+    float t, duration = 2f;
     
     public Pierce_SleepEnemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {
+        Debug.Log("Pierce Enter");
+        enemy.isDying = true;
         enemy.rd.linearVelocity = Vector2.zero;
-        enemy.anim.Play("SleepDie1");
+        enemy.anim.Play("pierce_sleep");
         t = duration;
     }
 

@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public float speed = 2f;
     public int currentHp;
     public List<string> resistances;
+    public bool isDying = false;
 
     public Rigidbody2D rd;
     public SpriteRenderer sr;
@@ -89,19 +90,26 @@ public class Enemy : MonoBehaviour
 
     public void OnHit(AttackType type)
     {
-        if (IsResisted(type))
-        {
-            return;
-        }
+        if (isDying) return;
+        if (IsResisted(type)) return;
+        if (--currentHp > 0) return;
 
         var currentState = fsm.CurrentState;
         if (currentState == SleepState)
         {
-            
+            // if (type == AttackType.Slash) fsm.ChangeState(Slash_Sleep);
+            if (type == AttackType.Bludgeon) fsm.ChangeState(Bludgeon_Sleep);
+            else if (type == AttackType.Pierce) fsm.ChangeState(Pierce_Sleep);
+            // else if (type == AttackType.Fire) fsm.ChangeState(Fire_Sleep);
+            // else if (type == AttackType.Ice) fsm.ChangeState(Ice_Sleep);
         }
         else
         {
-
+            // if (type == AttackType.Slash) fsm.ChangeState(Slash);
+            if (type == AttackType.Bludgeon) fsm.ChangeState(Bludgeon);
+            else if (type == AttackType.Pierce) fsm.ChangeState(Pierce);
+            // else if (type == AttackType.Fire) fsm.ChangeState(Fire);
+            // else if (type == AttackType.Ice) fsm.ChangeState(Ice);
         }
     }
 }

@@ -788,6 +788,7 @@ MonoBehaviour:
   speed: 2
   currentHp: 0
   resistances: []
+  isDying: 0
   rd: {fileID: 0}
   sr: {fileID: 0}
   cd: {fileID: 0}
@@ -995,6 +996,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2043281258}
   - component: {fileID: 2043281257}
+  - component: {fileID: 2043281259}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1017,7 +1019,7 @@ MonoBehaviour:
   enemyDataList: []
   weaponDataList: []
   health: 0
-  player: {fileID: 0}
+  player: {fileID: 917925383}
 --- !u!4 &2043281258
 Transform:
   m_ObjectHideFlags: 0
@@ -1033,6 +1035,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2043281259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043281256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe59876d46e19d4e9cb5598e496a53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 1067595891}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
