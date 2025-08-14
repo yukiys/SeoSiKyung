@@ -38,10 +38,10 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        EnemyData data = GameManager.instance.GetEnemyData(enemyName);
+        DataSet.EnemyData data = GameManager.instance.GetEnemyData(enemyName);
         if (data != null)
         {
-            currentHP = data.maxHP;
+            currentHP = data.maxHp;
             resistances = data.resistances;
         }
 

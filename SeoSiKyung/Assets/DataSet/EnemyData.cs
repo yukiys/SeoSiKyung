@@ -12,6 +12,7 @@ namespace DataSet
     
         public string title;
         public string description;
+        public string location;
         public int gimmickNumber;
         public List<string> gimmick;
     }

@@ -7,10 +7,32 @@
             "maxDurability": 3,
             "isRanged": 0,
             "attackRange": [-50, 10, 20, 0],
-            
+
             "title": "검",
             "description": ["적을 벨 수 있는 검이다."],
             "attackType": "참격"
+        },
+        {
+            "weaponName": "Hammer",
+            "type": "Bludgeon",
+            "maxDurability": 3,
+            "isRanged": 0,
+            "attackRange": [-70, 10, 40, 0],
+
+            "title": "망치",
+            "description": ["휘둘러서 적을 타격하는 망치다."],
+            "attackType": "타격"
+        },
+        {
+            "weaponName": "Spear",
+            "type": "Pierce",
+            "maxDurability": 3,
+            "isRanged": 0,
+            "attackRange": [-100, 10, 30, 0],
+
+            "title": "창",
+            "description": ["적을 찔러 관통하는 창이다."],
+            "attackType": "관통"
         },
         {
             "weaponName": "Crossbow",
@@ -20,7 +42,7 @@
             "attackRange": [-40, 10, 20, 0],
 
             "title": "쇠뇌",
-            "description": ["적을 관통하는 화살을 발사하는 쇠뇌.", "화살을 모두 사용하면 쇠뇌를 휘둘러 공격하자."],
+            "description": ["적을 관통하는 화살을 발사하는 쇠뇌다.", "화살을 모두 사용하면 쇠뇌를 휘둘러 공격하자."],
             "attackType": "관통"
         },
         {
@@ -31,7 +53,7 @@
             "attackRange": [-50, 10, 20, 0],
 
             "title": "화염 지팡이",
-            "description": ["화염구를 발사할 수 있는 지팡이.", "저장된 마법을 모두 사용하면 지팡이를 휘둘러 공격하자."],
+            "description": ["화염구를 발사할 수 있는 지팡이다.", "저장된 마법을 모두 사용하면 지팡이를 휘둘러 공격하자."],
             "attackType": "화염"
         },
         {
@@ -42,7 +64,7 @@
             "attackRange": [-50, 10, 20, 0],
 
             "title": "얼음 지팡이",
-            "description": ["얼음 구체를 발사할 수 있는 지팡이.", "저장된 마법을 모두 사용하면 지팡이를 휘둘러 공격하자."],
+            "description": ["얼음 구체를 발사할 수 있는 지팡이다.", "저장된 마법을 모두 사용하면 지팡이를 휘둘러 공격하자."],
             "attackType": "얼음"
         }
     ]
