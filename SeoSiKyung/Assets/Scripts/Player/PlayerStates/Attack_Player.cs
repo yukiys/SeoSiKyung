@@ -7,16 +7,17 @@ public class Attack_Player : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.Shoot();
+
     }
     public override void Tick()
     {
-        player.Shoot();
         if (player.grounded)
         {
             if (Mathf.Abs(player.inputX) > Player.INPUT_EPS) fsm.ChangeState(player.move);
             else fsm.ChangeState(player.idle);
         }
-        if (player.jumpCount < player.maxJumps && player.jumpDown)
+        else if (player.jumpCount < player.maxJumps && player.jumpDown)
         { fsm.ChangeState(player.jump); }
     }
 }

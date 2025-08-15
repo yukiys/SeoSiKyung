@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Ememy
   - Platform
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,7 +14,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - Player
   - 
   - 
   - 
