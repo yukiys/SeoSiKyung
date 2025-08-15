@@ -2,25 +2,35 @@ using UnityEngine;
 
 public class Idle_Enemy : EnemyState
 {
-    float idleMin = 0.8f;
-    float idleMax = 1.6f;
+    float idleMin = 0.8f, idleMax = 1.6f;
     float timer;
     public Idle_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {
+        base.Enter();
+
         enemy.rd.linearVelocity = Vector2.zero;
         enemy.anim.SetBool("isMoving", false);
-
         timer = Random.Range(idleMin, idleMax);
     }
 
     public override void LogicUpdate()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
+        base.LogicUpdate();
+
+        if (enemy.InAttackRange())
         {
-            fsm.ChangeState(enemy.PatrolState);
+            fsm.ChangeState(enemy.AttackState);
+            return;
         }
+        if (enemy.InDetectRange() && CanLeave())
+        {
+            fsm.ChangeState(enemy.TraceState);
+            return;
+        }
+
+        timer -= Time.deltaTime;
+        if (timer <= 0f && CanLeave()) fsm.ChangeState(enemy.PatrolState);
     }
 }

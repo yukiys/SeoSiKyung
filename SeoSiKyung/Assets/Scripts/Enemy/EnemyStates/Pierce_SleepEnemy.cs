@@ -8,7 +8,6 @@ public class Pierce_SleepEnemy : EnemyState
 
     public override void Enter()
     {
-        Debug.Log("Pierce Enter");
         enemy.isDying = true;
         enemy.rd.linearVelocity = Vector2.zero;
         enemy.anim.Play("pierce_sleep");
@@ -20,6 +19,8 @@ public class Pierce_SleepEnemy : EnemyState
         t -= Time.deltaTime;
         if (t <= 0f)
         {
+            if (enemy.PierceCorpse != null) Object.Instantiate(enemy.PierceCorpse, enemy.transform.position, enemy.transform.rotation);
+
             Object.Destroy(enemy.gameObject);
         }
     }

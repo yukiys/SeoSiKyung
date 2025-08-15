@@ -8,7 +8,6 @@ public class Bludgeon_Enemy : EnemyState
 
     public override void Enter()
     {
-        Debug.Log("bludgeom enter");
         enemy.isDying = true;
         enemy.rd.linearVelocity = Vector2.zero;
         enemy.anim.Play("bludgeon");

@@ -6,6 +6,8 @@ public class Trace_Enemy : EnemyState
 
     public override void Enter()
     {
+        base.Enter();
+        
         enemy.anim.SetBool("isMoving", true);
     }
 
@@ -17,18 +19,29 @@ public class Trace_Enemy : EnemyState
             return;
         }
 
-        Vector2 dir = (enemy.player.position - enemy.transform.position).normalized;
-        enemy.rd.linearVelocity = dir * enemy.speed;
-        enemy.sr.flipX = dir.x < 0;
+        float dx = enemy.player.position.x - enemy.transform.position.x;
+        int dir = dx > 0f ? 1 : -1;
+
+        if (!enemy.GroundAhead(dir) || enemy.WallAhead(dir))
+        {
+            enemy.rd.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        enemy.rd.linearVelocity = new Vector2(dir * enemy.speed, 0);
+        enemy.sr.flipX = dir > 0;
     }
 
     public override void LogicUpdate()
     {
-        if (!enemy.player || Vector2.Distance(enemy.transform.position, enemy.player.position) > 6f)
+        base.LogicUpdate();
+
+        if (enemy.InAttackRange())
         {
-            enemy.rd.linearVelocity = Vector2.zero;
-            enemy.anim.SetBool("isMoving", false);
-            fsm.ChangeState(enemy.IdleState);
+            fsm.ChangeState(enemy.AttackState);
+            return;
         }
+
+        if (!enemy.InDetectRange() && CanLeave()) fsm.ChangeState(enemy.IdleState);
     }
 }
