@@ -11,11 +11,11 @@ public class EnemyFSM
         CurrentState.Enter();
     }
 
-    public void ChangeState(EnemyState enemyState)
+    public void ChangeState(EnemyState next)
     {
-        if (CurrentState == enemyState) return;
+        if (CurrentState == next) return;
         CurrentState.Exit();
-        CurrentState = enemyState;
+        CurrentState = next;
         CurrentState.Enter();
     }
 

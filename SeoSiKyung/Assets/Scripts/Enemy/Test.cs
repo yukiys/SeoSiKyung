@@ -8,10 +8,17 @@ public class Test : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            enemy.OnHit(AttackType.Bludgeon);
+            Debug.Log("SLASH!");
+            enemy.OnHit(AttackType.Slash);
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
+            Debug.Log("BLUDGEON!");
+            enemy.OnHit(AttackType.Bludgeon);
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("PIERCE");
             enemy.OnHit(AttackType.Pierce);
         }
     }

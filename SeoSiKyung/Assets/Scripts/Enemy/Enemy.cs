@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using DataSet;
 using Assets.DataSet;
 
 public class Enemy : MonoBehaviour
@@ -10,12 +9,21 @@ public class Enemy : MonoBehaviour
     public int currentHp;
     public List<string> resistances;
     public bool isDying = false;
+    public Transform groundCheck;
+    public LayerMask groundMask;
+    public LayerMask wallMask;
+    public float groundCheckDistance = 3f;
+    public float wallCheckDistance = 3f;
+    public float detectRange = 9f;
+    public float attackRange = 6f;
+    public GameObject PierceCorpse;
 
-    public Rigidbody2D rd;
-    public SpriteRenderer sr;
-    public Collider2D cd;
-    public Animator anim;
-    public Transform player;
+    [HideInInspector] public Rigidbody2D rd;
+    [HideInInspector] public SpriteRenderer sr;
+    [HideInInspector] public Collider2D cd;
+    [HideInInspector] public Animator anim;
+    [HideInInspector] public Transform player;
+    [HideInInspector] public PlatformTrigger platform;
 
 
     public EnemyFSM fsm { get; set; }
@@ -63,20 +71,9 @@ public class Enemy : MonoBehaviour
         fsm.Initialize(SleepState);
     }
 
-    void Update()
-    {
-        fsm.LogicUpdate();
-    }
+    void Update() => fsm.LogicUpdate();
+    void FixedUpdate() => fsm.PhysicsUpdate();
 
-    void FixedUpdate()
-    {
-        fsm.PhysicsUpdate();
-    }
-
-    public void WakeUp()
-    {
-        fsm.ChangeState(AwakeState);
-    }
 
     private bool IsResisted(AttackType type)
     {
@@ -91,19 +88,22 @@ public class Enemy : MonoBehaviour
     public void OnHit(AttackType type)
     {
         if (isDying) return;
-        if (IsResisted(type)) return;
-        if (--currentHp > 0) return;
+        if (IsResisted(type))
+        {
+            fsm.ChangeState(AwakeState);
+            return;
+        }
 
-        var currentState = fsm.CurrentState;
-        if (currentState == SleepState)
+        if (fsm.CurrentState == SleepState)
         {
             // if (type == AttackType.Slash) fsm.ChangeState(Slash_Sleep);
             if (type == AttackType.Bludgeon) fsm.ChangeState(Bludgeon_Sleep);
             else if (type == AttackType.Pierce) fsm.ChangeState(Pierce_Sleep);
             // else if (type == AttackType.Fire) fsm.ChangeState(Fire_Sleep);
             // else if (type == AttackType.Ice) fsm.ChangeState(Ice_Sleep);
+            return;
         }
-        else
+        if(--currentHp<=0)
         {
             // if (type == AttackType.Slash) fsm.ChangeState(Slash);
             if (type == AttackType.Bludgeon) fsm.ChangeState(Bludgeon);
@@ -111,5 +111,36 @@ public class Enemy : MonoBehaviour
             // else if (type == AttackType.Fire) fsm.ChangeState(Fire);
             // else if (type == AttackType.Ice) fsm.ChangeState(Ice);
         }
+    }
+
+    public bool GroundAhead(int dir)
+    {
+        if (!groundCheck) return true;
+
+        Vector2 origin = (Vector2)groundCheck.position + new Vector2(dir * groundCheckDistance, 0f);
+
+        Debug.DrawLine(origin, origin + Vector2.down * 0.3f, Color.yellow);
+        var hit = Physics2D.Raycast(origin, Vector2.down, 0.3f, groundMask);
+        return hit.collider != null;
+    }
+
+    public bool WallAhead(int dir)
+    {
+        Vector2 origin = (Vector2)transform.position + new Vector2(dir * 0.2f, -0.2f);
+        Vector2 dirVec = new Vector2(dir, 0f);
+
+        Debug.DrawLine(origin, origin + dirVec * wallCheckDistance, Color.red);
+        var hit = Physics2D.Raycast(origin, dirVec, wallCheckDistance, wallMask);
+        return hit.collider != null;
+    }
+
+    public bool InDetectRange()
+    {
+        return Vector2.SqrMagnitude(player.position - transform.position) <= detectRange * detectRange;
+    }
+
+    public bool InAttackRange()
+    {
+        return Vector2.SqrMagnitude(player.position - transform.position) <= attackRange * attackRange; 
     }
 }
