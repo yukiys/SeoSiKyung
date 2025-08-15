@@ -114,9 +114,11 @@ public class Player : MonoBehaviour
     public void Shoot()
     {
         if (!OnCooltime()) return;
-        GameObject fireball = Instantiate(fbobject, transform.position,transform.rotation);
-        Rigidbody2D rd = fireball.GetComponent<Rigidbody2D>();
         Vector2 dir = (sr != null && sr.flipX) ? Vector2.left : Vector2.right;
+        Quaternion rotation = Quaternion.Euler(0, 0, -90);
+        if (dir == Vector2.left) rotation = Quaternion.Euler(0, 0, 90); 
+        GameObject fireball = Instantiate(fbobject, transform.position,rotation);
+        Rigidbody2D rd = fireball.GetComponent<Rigidbody2D>();
         rd.AddForce(dir * fireForce, ForceMode2D.Impulse);
         Curtime = 0;
     }

@@ -38,6 +38,7 @@ public class PlatformTrigger : MonoBehaviour
             foreach (var e in enemies)
             {
                 e.WakeUp();
+                Debug.Log(e);
             }
         }
     }
