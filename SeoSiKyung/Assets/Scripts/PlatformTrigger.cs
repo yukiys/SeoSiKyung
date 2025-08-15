@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour
 {
-    public List<Enemy> enemies=new List<Enemy>();
+    public bool playerInside { get; set; }
+    public List<Enemy> enemies = new List<Enemy>();
     Collider2D cd;
 
     void Awake()
@@ -31,15 +32,19 @@ public class PlatformTrigger : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.CompareTag("Player"))
         {
-            foreach (var e in enemies)
-            {
-                e.WakeUp();
-                Debug.Log(e);
-            }
+            playerInside = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.collider.CompareTag("Player"))
+        {
+            playerInside = false;
         }
     }
 }
