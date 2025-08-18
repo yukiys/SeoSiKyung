@@ -191,9 +191,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Golem
-  speed: 2
+  speed: 0
   currentHp: 0
   resistances: []
+  groundCheckDistance: 0
+  wallCheckDistance: 0
+  detectRange: 0
+  attackRange: 0
+  isRanged: 0
+  attackArea: []
   isDying: 0
   groundCheck: {fileID: 8434169569356026965}
   groundMask:
@@ -202,17 +208,16 @@ MonoBehaviour:
   wallMask:
     serializedVersion: 2
     m_Bits: 64
-  groundCheckDistance: 0.3
-  wallCheckDistance: 3
-  detectRange: 9
-  attackRange: 6
+  SlashCorpse: {fileID: 0}
+  BludgeonCorpse: {fileID: 0}
   PierceCorpse: {fileID: 4206572656980702753, guid: 78ae95b2e5be55745b9ef85c86ab2df6, type: 3}
+  FireCorpse: {fileID: 0}
+  IceCorpse: {fileID: 0}
   rd: {fileID: 0}
   sr: {fileID: 0}
   cd: {fileID: 0}
   anim: {fileID: 0}
   player: {fileID: 0}
-  platform: {fileID: 0}
 --- !u!1 &8581210303515579197
 GameObject:
   m_ObjectHideFlags: 0

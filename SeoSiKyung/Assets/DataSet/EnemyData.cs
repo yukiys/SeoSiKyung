@@ -8,7 +8,13 @@ namespace DataSet
         public string enemyName;
         public List<string> resistances;
         public int maxHp;
-        public List<float> attackRange;
+        public float speed;
+        public float groundCheckDistance;
+        public float wallCheckDistance;
+        public float detectRange;
+        public float attackRange;
+        public bool isRanged;
+        public List<float> attackArea;
     
         public string title;
         public string description;
