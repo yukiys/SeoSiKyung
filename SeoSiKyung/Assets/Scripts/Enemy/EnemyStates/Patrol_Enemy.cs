@@ -18,8 +18,16 @@ public class Patrol_Enemy : EnemyState
         enemy.sr.flipX = dir > 0;
         
         AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
-        if (!info.IsName("walk"))
-            enemy.anim.Play("walk");
+        if (enemy.idlewalk)
+        {
+            if (!info.IsName("idle") && !info.IsName("walk"))
+                enemy.anim.Play("idle");
+        }
+        else
+        {
+            if (!info.IsName("idle"))
+                enemy.anim.Play("idle");
+        }
         
         timer = Random.Range(patrolMin, patrolMax);
     }

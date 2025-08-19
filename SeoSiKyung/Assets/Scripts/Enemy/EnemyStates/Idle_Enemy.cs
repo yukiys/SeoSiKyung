@@ -13,8 +13,16 @@ public class Idle_Enemy : EnemyState
         enemy.rd.linearVelocity = Vector2.zero;
         
         AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
-        if (!info.IsName("idle")) // idlewalk 추가
-            enemy.anim.Play("idle");
+        if (enemy.idlewalk)
+        {
+            if (!info.IsName("idle") && !info.IsName("walk"))
+                enemy.anim.Play("idle");
+        }
+        else
+        {
+            if (!info.IsName("idle"))
+                enemy.anim.Play("idle");
+        }
         
         timer = Random.Range(idleMin, idleMax);
     }
