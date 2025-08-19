@@ -1,0 +1,30 @@
+using UnityEngine;
+
+public class Idle_Player : PlayerState
+{
+    public Idle_Player(Player p, PlayerFSM m) : base(p, m) { }
+
+    public override void Enter()
+    {
+        base.Enter();
+        player.SetRun(false);
+    }
+
+    public override void Tick()
+    {
+        if (Mathf.Abs(player.inputX) > Player.INPUT_EPS)
+        { fsm.ChangeState(player.move); return; }
+
+        if (player.jumpCount < player.maxJumps && player.jumpDown)
+        { fsm.ChangeState(player.jump); }
+        if (player.attackDown && player.OnCooltime()) { fsm.ChangeState(player.attack); return; }
+
+    }
+
+    public override void FixedTick()
+    {
+        var v = rb.linearVelocity;
+        v.x = 0f;
+        rb.linearVelocity = v;
+    }
+}

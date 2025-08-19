@@ -1,33 +1,77 @@
 using System.Collections.Generic;
 using UnityEngine;
-using DataSet;
 using Assets.DataSet;
 
 public class Enemy : MonoBehaviour
 {
+    #region ---- Enemy Data ----
+    [Header("Identity")]
     public string enemyName;
-    public float speed = 2f;
+
+    [Header("Stats")]
+    public float speed;
     public int currentHp;
     public List<string> resistances;
 
-    public Rigidbody2D rd;
-    public SpriteRenderer sr;
-    public Collider2D cd;
-    public Animator anim;
-    public Transform player;
+    [Header("Senses / Ranges")]
+    public float groundCheckDistance;
+    public float wallCheckDistance;
+    public float detectRange;
+    public float attackRange;
+    public bool isRanged;
+    public List<float> attackArea;
+    #endregion
 
+    #region ---- Inspector References ----
+    [Header("Checks & Masks")]
+    public Transform groundCheck;
+    public LayerMask groundMask;
+    public LayerMask wallMask;
 
+    [Header("Corpse Prefabs")]
+    public GameObject SlashCorpse;
+    public GameObject BludgeonCorpse;
+    public GameObject PierceCorpse;
+    public GameObject FireCorpse;
+    public GameObject IceCorpse;
+    #endregion
+
+    #region ---- Runtime State & Components ----
+    [HideInInspector] public bool isDying = false;
+    
+    [HideInInspector] public Rigidbody2D rd;
+    [HideInInspector] public SpriteRenderer sr;
+    [HideInInspector] public Collider2D cd;
+    [HideInInspector] public Animator anim;
+    [HideInInspector] public Transform player;
+    #endregion
+
+    #region ---- FSM & Enemy States ----
+    [Header("FSM")]
     public EnemyFSM fsm { get; set; }
-    public EnemySleepState SleepState { get; set; }
-    public EnemySleepDie1 SleepDie1 { get; set; }
-    public EnemySleepDie2 SleepDie2 { get; set; }
-    public EnemyAwakeState AwakeState { get; set; }
-    public EnemyAwakeDie1 AwakeDie1 { get; set; }
-    public EnemyAwakeDie2 AwakeDie2 { get; set; }
-    public EnemyIdleState IdleState { get; set; }
-    public EnemyPatrolState PatrolState { get; set; }
-    public EnemyTraceState TraceState { get; set; }
-    public EnemyAttackState AttackState { get; set; }
+
+    [Header("SleepStates")]
+    public Sleep_Enemy SleepState { get; set; }
+    public Slash_SleepEnemy Slash_Sleep { get; set; }
+    public Pierce_SleepEnemy Pierce_Sleep { get; set; }
+    public Bludgeon_SleepEnemy Bludgeon_Sleep { get; set; }
+    public Fire_SleepEnemy Fire_Sleep { get; set; }
+    public Ice_SleepEnemy Ice_Sleep { get; set; }
+
+    [Header("AwakeStates")]
+    public Awake_Enemy AwakeState { get; set; }
+    public Slash_Enemy Slash { get; set; }
+    public Bludgeon_Enemy Bludgeon { get; set; }
+    public Pierce_Enemy Pierce { get; set; }
+    public Fire_Enemy Fire { get; set; }
+    public Ice_Enemy Ice { get; set; }
+
+    [Header("CommonStates")]
+    public Idle_Enemy IdleState { get; set; }
+    public Patrol_Enemy PatrolState { get; set; }
+    public Trace_Enemy TraceState { get; set; }
+    public Attack_Enemy AttackState { get; set; }
+    #endregion
 
     void Awake()
     {
@@ -38,46 +82,51 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
 
         fsm = new EnemyFSM();
-        SleepState = new EnemySleepState(this, fsm);
-        SleepDie1 = new EnemySleepDie1(this, fsm);
-        SleepDie2 = new EnemySleepDie2(this, fsm);
-        AwakeState = new EnemyAwakeState(this, fsm);
-        AwakeDie1 = new EnemyAwakeDie1(this, fsm);
-        AwakeDie2 = new EnemyAwakeDie2(this, fsm);
-        IdleState = new EnemyIdleState(this, fsm);
-        PatrolState = new EnemyPatrolState(this, fsm);
-        TraceState = new EnemyTraceState(this, fsm);
-        AttackState = new EnemyAttackState(this, fsm);
+        SleepState = new Sleep_Enemy(this, fsm);
+        Slash_Sleep = new Slash_SleepEnemy(this, fsm);
+        Pierce_Sleep = new Pierce_SleepEnemy(this, fsm);
+        Bludgeon_Sleep = new Bludgeon_SleepEnemy(this, fsm);
+        Fire_Sleep = new Fire_SleepEnemy(this, fsm);
+        Ice_Sleep = new Ice_SleepEnemy(this, fsm);
+        AwakeState = new Awake_Enemy(this, fsm);
+        Slash = new Slash_Enemy(this, fsm);
+        Bludgeon = new Bludgeon_Enemy(this, fsm);
+        Pierce = new Pierce_Enemy(this, fsm);
+        Fire = new Fire_Enemy(this, fsm);
+        Ice = new Ice_Enemy(this, fsm);
+        IdleState = new Idle_Enemy(this, fsm);
+        PatrolState = new Patrol_Enemy(this, fsm);
+        TraceState = new Trace_Enemy(this, fsm);
+        AttackState = new Attack_Enemy(this, fsm);
     }
 
     void Start()
     {
-        DataSet.EnemyData data = GameManager.instance.GetEnemyData(enemyName);
-        if (data != null)
-        {
-            currentHp = data.maxHp;
-            resistances = data.resistances;
-        }
-
+        GetEnemyData(enemyName);
         fsm.Initialize(SleepState);
     }
 
-    void Update()
+    void Update() => fsm.LogicUpdate();
+    void FixedUpdate() => fsm.PhysicsUpdate();
+
+    public void GetEnemyData(string enemyName)
     {
-        fsm.LogicUpdate();
+        DataSet.EnemyData data = GameManager.instance.GetEnemyData(enemyName);
+        if (data != null)
+        {
+            resistances = data.resistances;
+            currentHp = data.maxHp;
+            speed = data.speed;
+            groundCheckDistance = data.groundCheckDistance;
+            wallCheckDistance = data.wallCheckDistance;
+            detectRange = data.detectRange;
+            attackRange = data.attackRange;
+            isRanged = data.isRanged;
+            attackArea = data.attackArea;
+        }
     }
 
-    void FixedUpdate()
-    {
-        fsm.PhysicsUpdate();
-    }
-
-    public void WakeUp()
-    {
-        fsm.ChangeState(AwakeState);
-    }
-
-    private bool IsResisted(AttackType type)
+    public bool IsResisted(AttackType type)
     {
         string key = type.ToString();
 
@@ -89,19 +138,60 @@ public class Enemy : MonoBehaviour
 
     public void OnHit(AttackType type)
     {
+        if (isDying) return;
         if (IsResisted(type))
         {
+            fsm.ChangeState(AwakeState);
             return;
         }
 
-        var currentState = fsm.CurrentState;
-        if (currentState == SleepState)
+        if (fsm.CurrentState == SleepState)
         {
-            
+            if (type == AttackType.Slash) fsm.ChangeState(Slash_Sleep);
+            else if (type == AttackType.Bludgeon) fsm.ChangeState(Bludgeon_Sleep);
+            else if (type == AttackType.Pierce) fsm.ChangeState(Pierce_Sleep);
+            else if (type == AttackType.Fire) fsm.ChangeState(Fire_Sleep);
+            else if (type == AttackType.Ice) fsm.ChangeState(Ice_Sleep);
+            return;
         }
-        else
+        if(--currentHp<=0)
         {
+            if (type == AttackType.Slash) fsm.ChangeState(Slash);
+            else if (type == AttackType.Bludgeon) fsm.ChangeState(Bludgeon);
+            else if (type == AttackType.Pierce) fsm.ChangeState(Pierce);
+            else if (type == AttackType.Fire) fsm.ChangeState(Fire);
+            else if (type == AttackType.Ice) fsm.ChangeState(Ice);
+        }
+    }
 
-        }
+    public bool GroundAhead(int dir)
+    {
+        if (!groundCheck) return true;
+
+        Vector2 origin = (Vector2)groundCheck.position + new Vector2(dir * groundCheckDistance, 0f);
+
+        Debug.DrawLine(origin, origin + Vector2.down * 0.3f, Color.yellow);
+        var hit = Physics2D.Raycast(origin, Vector2.down, 0.3f, groundMask);
+        return hit.collider != null;
+    }
+
+    public bool WallAhead(int dir)
+    {
+        Vector2 origin = (Vector2)transform.position + new Vector2(dir * 0.2f, -0.2f);
+        Vector2 dirVec = new Vector2(dir, 0f);
+
+        Debug.DrawLine(origin, origin + dirVec * wallCheckDistance, Color.red);
+        var hit = Physics2D.Raycast(origin, dirVec, wallCheckDistance, wallMask);
+        return hit.collider != null;
+    }
+
+    public bool InDetectRange()
+    {
+        return Vector2.SqrMagnitude(player.position - transform.position) <= detectRange * detectRange;
+    }
+
+    public bool InAttackRange()
+    {
+        return Vector2.SqrMagnitude(player.position - transform.position) <= attackRange * attackRange; 
     }
 }
