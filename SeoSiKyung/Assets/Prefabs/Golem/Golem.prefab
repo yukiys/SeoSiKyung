@@ -191,17 +191,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Golem
-  speed: 0
-  currentHp: 0
   resistances: []
+  currentHp: 0
+  speed: 0
   groundCheckDistance: 0
   wallCheckDistance: 0
   detectRange: 0
   attackRange: 0
   isRanged: 0
   attackArea: []
-  isDying: 0
+  idlewalk: 0
   groundCheck: {fileID: 8434169569356026965}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 128
   groundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -213,6 +216,7 @@ MonoBehaviour:
   PierceCorpse: {fileID: 4206572656980702753, guid: 78ae95b2e5be55745b9ef85c86ab2df6, type: 3}
   FireCorpse: {fileID: 0}
   IceCorpse: {fileID: 0}
+  isDying: 0
   rd: {fileID: 0}
   sr: {fileID: 0}
   cd: {fileID: 0}

@@ -9,22 +9,28 @@ public class Enemy : MonoBehaviour
     public string enemyName;
 
     [Header("Stats")]
-    public float speed;
-    public int currentHp;
     public List<string> resistances;
+    public int currentHp;
+    public float speed;
 
-    [Header("Senses / Ranges")]
+    [Header("Senses")]
     public float groundCheckDistance;
     public float wallCheckDistance;
     public float detectRange;
     public float attackRange;
+
+    [Header("Ranges")]
     public bool isRanged;
     public List<float> attackArea;
+
+    [Header("animation")]
+    public bool idlewalk;
     #endregion
 
     #region ---- Inspector References ----
     [Header("Checks & Masks")]
     public Transform groundCheck;
+    public LayerMask playerMask;
     public LayerMask groundMask;
     public LayerMask wallMask;
 
@@ -38,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     #region ---- Runtime State & Components ----
     [HideInInspector] public bool isDying = false;
-    
+
     [HideInInspector] public Rigidbody2D rd;
     [HideInInspector] public SpriteRenderer sr;
     [HideInInspector] public Collider2D cd;
@@ -154,7 +160,7 @@ public class Enemy : MonoBehaviour
             else if (type == AttackType.Ice) fsm.ChangeState(Ice_Sleep);
             return;
         }
-        if(--currentHp<=0)
+        if (--currentHp <= 0)
         {
             if (type == AttackType.Slash) fsm.ChangeState(Slash);
             else if (type == AttackType.Bludgeon) fsm.ChangeState(Bludgeon);
@@ -192,6 +198,43 @@ public class Enemy : MonoBehaviour
 
     public bool InAttackRange()
     {
-        return Vector2.SqrMagnitude(player.position - transform.position) <= attackRange * attackRange; 
+        return Vector2.SqrMagnitude(player.position - transform.position) <= attackRange * attackRange;
+    }
+
+    public void EnemyAttack()
+    {
+        float x = attackArea[0];
+        float y = attackArea[1];
+        float w = attackArea[2];
+        float h = attackArea[3];
+
+        int dir = 1;
+        if (sr.flipX == true) dir *= -1;
+
+        Vector2 LeftBottom = new Vector2(x * -dir, y);
+        Vector2 center = (Vector2)transform.position + LeftBottom + new Vector2(w * 0.5f, h * 0.5f);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(center, new Vector2(w, h), 0f, playerMask);
+        DebugDrawAttackBox(center, w, h, Color.red, 0.2f);
+
+        foreach (var hit in hits)
+        {
+            var p = hit.GetComponent<Player>();
+            if (p != null)
+            {
+                GameManager.instance.HealthDown();
+            }
+        }
+    }
+
+    void DebugDrawAttackBox(Vector2 center, float w, float h, Color c, float duration)
+    {
+        Vector3 a = new Vector3(center.x - w/2f, center.y - h/2f, 0);
+        Vector3 b = new Vector3(center.x + w/2f, center.y - h/2f, 0);
+        Vector3 d = new Vector3(center.x - w/2f, center.y + h/2f, 0);
+        Vector3 e = new Vector3(center.x + w/2f, center.y + h/2f, 0);
+        Debug.DrawLine(a, b, c, duration);
+        Debug.DrawLine(b, e, c, duration);
+        Debug.DrawLine(e, d, c, duration);
+        Debug.DrawLine(d, a, c, duration);
     }
 }

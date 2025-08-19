@@ -20,15 +20,15 @@ public class GameManager : MonoBehaviour
         return enemyDataList.Find(e => e.enemyName == enemyName);
     }
 
-    public void HealthDown(int h)
+    public void HealthDown()
     {
-        if (health > h)
+        if (--health > 0)
         {
-            health -= h;
+            return;
         }
         else
         {
-            // player.die();
+            // player.did()
         }
     }
 }
