@@ -6,12 +6,16 @@
             "resistances": ["Slash","Fire","Ice"],
             "maxHp": 5,
             "speed": 2,
+            
             "groundCheckDistance": 3,
             "wallCheckDistance": 3,
             "detectRange": 9,
             "attackRange": 6,
+            
             "isRanged": 0,
             "attackArea": [-30, 100, 50, 0],
+            
+            "idlewalk": 1,
             
             "title": "초기형 골렘",
             "description": ["골렘의 기본 형태"],

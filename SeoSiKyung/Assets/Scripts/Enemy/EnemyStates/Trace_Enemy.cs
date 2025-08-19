@@ -7,8 +7,9 @@ public class Trace_Enemy : EnemyState
     public override void Enter()
     {
         base.Enter();
-        
-        enemy.anim.SetBool("isMoving", true);
+        AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
+        if (!info.IsName("walk")) // idlewalk 추가
+            enemy.anim.Play("walk");
     }
 
     public override void PhysicsUpdate()

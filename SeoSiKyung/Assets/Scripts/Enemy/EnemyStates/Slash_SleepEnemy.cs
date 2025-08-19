@@ -16,10 +16,8 @@ public class Slash_SleepEnemy : EnemyState
 
     public override void LogicUpdate()
     {
-        t -= Time.deltaTime;
-        if (t <= 0f)
-        {
+        AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
+        if (info.normalizedTime >= 1f)
             Object.Destroy(enemy.gameObject);
-        }
     }
 }

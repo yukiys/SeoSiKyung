@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Attack_Enemy : EnemyState
 {
-    public float t, duration = 2.2f;
     public Attack_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
@@ -10,15 +9,16 @@ public class Attack_Enemy : EnemyState
         if (enemy.isDying) return;
 
         enemy.rd.linearVelocity = Vector2.zero;
-        enemy.anim.SetBool("isMoving", false);
-        enemy.anim.Play("attack");
-
-        t = duration;
+        
+        AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
+        if (!info.IsName("attack"))
+            enemy.anim.Play("attack");
     }
 
     public override void LogicUpdate()
     {
-        t -= Time.deltaTime;
-        if (t <= 0f) fsm.ChangeState(enemy.IdleState);
+        AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
+        if (info.IsName("attack") && info.normalizedTime >= 1f)
+            fsm.ChangeState(enemy.IdleState);
     }
 }

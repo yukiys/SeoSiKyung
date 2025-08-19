@@ -16,11 +16,10 @@ public class Pierce_SleepEnemy : EnemyState
 
     public override void LogicUpdate()
     {
-        t -= Time.deltaTime;
-        if (t <= 0f)
-        {
-            if (enemy.PierceCorpse != null) Object.Instantiate(enemy.PierceCorpse, enemy.transform.position, enemy.transform.rotation);
-
+        AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
+        if (info.normalizedTime >= 1f){
+            if (enemy.PierceCorpse != null)
+                Object.Instantiate(enemy.PierceCorpse, enemy.transform.position, enemy.transform.rotation);
             Object.Destroy(enemy.gameObject);
         }
     }

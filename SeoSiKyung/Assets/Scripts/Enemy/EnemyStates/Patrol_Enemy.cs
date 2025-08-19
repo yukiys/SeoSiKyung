@@ -16,7 +16,11 @@ public class Patrol_Enemy : EnemyState
         if (!enemy.GroundAhead(dir) || enemy.WallAhead(dir)) dir *= -1;
 
         enemy.sr.flipX = dir > 0;
-        enemy.anim.SetBool("isMoving", true);
+        
+        AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
+        if (!info.IsName("walk"))
+            enemy.anim.Play("walk");
+        
         timer = Random.Range(patrolMin, patrolMax);
     }
 
