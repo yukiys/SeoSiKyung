@@ -129,6 +129,7 @@ public class Enemy : MonoBehaviour
             attackRange = data.attackRange;
             isRanged = data.isRanged;
             attackArea = data.attackArea;
+            idlewalk = data.idlewalk;
         }
     }
 

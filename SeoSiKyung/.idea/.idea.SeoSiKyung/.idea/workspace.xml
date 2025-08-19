@@ -6,31 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="bb0d991a-0329-43b7-8107-512ed124ae94" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SeoSiKyung/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SeoSiKyung/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Golem/Golem_Animator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Golem/Golem_Animator.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Golem/attack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Golem/attack.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Golem/awake.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Golem/awake.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Golem/bludgeon.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Golem/bludgeon.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Golem/bludgeon_sleep.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Golem/bludgeon_sleep.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Golem/idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Golem/idle.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Golem/walk.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Golem/walk.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DataSet/EnemyData.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DataSet/EnemyData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Attack_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Attack_Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Awake_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Awake_Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Bludgeon_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Bludgeon_Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Bludgeon_SleepEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Bludgeon_SleepEnemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Fire_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Fire_Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Fire_SleepEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Fire_SleepEnemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Ice_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Ice_Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Ice_SleepEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Ice_SleepEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DataSet/EnemyData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DataSet/EnemyData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/Enemy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Idle_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Idle_Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Patrol_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Patrol_Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Pierce_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Pierce_Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Pierce_SleepEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Pierce_SleepEnemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Slash_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Slash_Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Slash_SleepEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Slash_SleepEnemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Trace_Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyStates/Trace_Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Search.settings" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Search.settings" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +103,7 @@
       <workItem from="1754655793669" duration="4034000" />
       <workItem from="1754719715994" duration="4931000" />
       <workItem from="1755590690887" duration="5049000" />
+      <workItem from="1755599463623" duration="1165000" />
     </task>
     <servers />
   </component>

@@ -15,6 +15,7 @@ namespace DataSet
         public float attackRange;
         public bool isRanged;
         public List<float> attackArea;
+        public bool idlewalk;
     
         public string title;
         public string description;
