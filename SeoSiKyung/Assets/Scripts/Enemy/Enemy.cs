@@ -208,13 +208,11 @@ public class Enemy : MonoBehaviour
         float w = attackArea[2];
         float h = attackArea[3];
 
-        int dir = 1;
-        if (sr.flipX == true) dir *= -1;
+        int dir = sr.flipX ? -1 : 1;
 
-        Vector2 LeftBottom = new Vector2(x * -dir, y);
-        Vector2 center = (Vector2)transform.position + LeftBottom + new Vector2(w * 0.5f, h * 0.5f);
+        Vector2 leftBottom = new Vector2(x * -dir, y);
+        Vector2 center = (Vector2)transform.position + leftBottom + new Vector2(w * 0.5f, h * 0.5f);
         Collider2D[] hits = Physics2D.OverlapBoxAll(center, new Vector2(w, h), 0f, playerMask);
-        DebugDrawAttackBox(center, w, h, Color.red, 0.2f);
 
         foreach (var hit in hits)
         {
@@ -224,17 +222,5 @@ public class Enemy : MonoBehaviour
                 GameManager.instance.HealthDown();
             }
         }
-    }
-
-    void DebugDrawAttackBox(Vector2 center, float w, float h, Color c, float duration)
-    {
-        Vector3 a = new Vector3(center.x - w/2f, center.y - h/2f, 0);
-        Vector3 b = new Vector3(center.x + w/2f, center.y - h/2f, 0);
-        Vector3 d = new Vector3(center.x - w/2f, center.y + h/2f, 0);
-        Vector3 e = new Vector3(center.x + w/2f, center.y + h/2f, 0);
-        Debug.DrawLine(a, b, c, duration);
-        Debug.DrawLine(b, e, c, duration);
-        Debug.DrawLine(e, d, c, duration);
-        Debug.DrawLine(d, a, c, duration);
     }
 }

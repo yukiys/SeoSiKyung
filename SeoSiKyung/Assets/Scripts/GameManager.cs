@@ -24,11 +24,12 @@ public class GameManager : MonoBehaviour
     {
         if (--health > 0)
         {
+            Debug.Log("player health : " + health);
             return;
         }
         else
         {
-            // player.did()
+            // player.die()
         }
     }
 }

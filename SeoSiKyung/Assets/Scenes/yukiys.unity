@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 917925384}
   - component: {fileID: 917925382}
   - component: {fileID: 917925388}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -904,8 +904,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDataList: []
   weaponDataList: []
-  health: 0
-  player: {fileID: 0}
+  health: 5
+  player: {fileID: 917925388}
 --- !u!4 &2043281258
 Transform:
   m_ObjectHideFlags: 0
