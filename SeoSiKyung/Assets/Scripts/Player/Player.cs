@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [Header("Optional")]
     public Animator animator;
     public SpriteRenderer sr;
+    [Header("Object")]
     public GameObject fbobject;
     [Header("Cooldown")]
     public float fbCooltime;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool  jumpDown, jumpUp;
     [HideInInspector] public bool  grounded;
     [HideInInspector] public int   jumpCount;
+    [HideInInspector] public int   CurWp;
 
     // FSM
     public PlayerFSM fsm { get; private set; }
@@ -111,14 +113,14 @@ public class Player : MonoBehaviour
         if (Curtime < fbCooltime) return false;
         else return true;
     }
-    public void Shoot()
+    public void Shoot(GameObject obj)
     {
         if (!OnCooltime()) return;
         Vector2 dir = (sr != null && sr.flipX) ? Vector2.left : Vector2.right;
         Quaternion rotation = Quaternion.Euler(0, 0, -90);
         if (dir == Vector2.left) rotation = Quaternion.Euler(0, 0, 90); 
-        GameObject fireball = Instantiate(fbobject, transform.position,rotation);
-        Rigidbody2D rd = fireball.GetComponent<Rigidbody2D>();
+        GameObject proj = Instantiate(obj, transform.position,rotation);
+        Rigidbody2D rd = proj.GetComponent<Rigidbody2D>();
         rd.AddForce(dir * fireForce, ForceMode2D.Impulse);
         Curtime = 0;
     }

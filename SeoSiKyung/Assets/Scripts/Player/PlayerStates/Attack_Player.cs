@@ -7,7 +7,7 @@ public class Attack_Player : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.Shoot();
+        player.Shoot(player.fbobject);
 
     }
     public override void Tick()
