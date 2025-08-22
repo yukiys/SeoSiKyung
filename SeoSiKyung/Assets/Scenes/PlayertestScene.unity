@@ -885,9 +885,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Golem
-  speed: 2
-  currentHp: 0
   resistances: []
+  currentHp: 0
+  speed: 2
+  groundCheckDistance: 0
+  wallCheckDistance: 0
+  detectRange: 0
+  attackRange: 0
+  isRanged: 0
+  attackArea: []
+  idlewalk: 0
+  groundCheck: {fileID: 0}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 0
+  SlashCorpse: {fileID: 0}
+  BludgeonCorpse: {fileID: 0}
+  PierceCorpse: {fileID: 0}
+  FireCorpse: {fileID: 0}
+  IceCorpse: {fileID: 0}
   isDying: 0
   rd: {fileID: 0}
   sr: {fileID: 0}
