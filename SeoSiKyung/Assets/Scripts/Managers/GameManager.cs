@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     public List<DataSet.EnemyData> enemyDataList = new List<DataSet.EnemyData>();
     public List<DataSet.WeaponData> weaponDataList = new List<DataSet.WeaponData>();
 
-    public int health;
+    public int maxHealth=5;
+    public int health=5;
     public Player player;
 
     void Awake()
@@ -24,12 +25,11 @@ public class GameManager : MonoBehaviour
     {
         if (--health > 0)
         {
-            Debug.Log("player health : " + health);
             return;
         }
         else
         {
-            // player.die()
+            Debug.Log("Player Die!");
         }
     }
 }

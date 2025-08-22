@@ -10,7 +10,8 @@ public class Enemy : MonoBehaviour
 
     [Header("Stats")]
     public List<string> resistances;
-    public int currentHp;
+    public int maxHp;
+    public int Hp;
     public float speed;
 
     [Header("Senses")]
@@ -121,7 +122,8 @@ public class Enemy : MonoBehaviour
         if (data != null)
         {
             resistances = data.resistances;
-            currentHp = data.maxHp;
+            maxHp = data.maxHp;
+            Hp = maxHp;
             speed = data.speed;
             groundCheckDistance = data.groundCheckDistance;
             wallCheckDistance = data.wallCheckDistance;
@@ -146,7 +148,7 @@ public class Enemy : MonoBehaviour
     public void OnHit(AttackType type)
     {
         if (isDying) return;
-        if (IsResisted(type))
+        if (fsm.CurrentState==SleepState && IsResisted(type))
         {
             fsm.ChangeState(AwakeState);
             return;
@@ -154,6 +156,8 @@ public class Enemy : MonoBehaviour
 
         if (fsm.CurrentState == SleepState)
         {
+            Hp = 0;
+            
             if (type == AttackType.Slash) fsm.ChangeState(Slash_Sleep);
             else if (type == AttackType.Bludgeon) fsm.ChangeState(Bludgeon_Sleep);
             else if (type == AttackType.Pierce) fsm.ChangeState(Pierce_Sleep);
@@ -161,7 +165,7 @@ public class Enemy : MonoBehaviour
             else if (type == AttackType.Ice) fsm.ChangeState(Ice_Sleep);
             return;
         }
-        if (--currentHp <= 0)
+        if (--Hp <= 0)
         {
             if (type == AttackType.Slash) fsm.ChangeState(Slash);
             else if (type == AttackType.Bludgeon) fsm.ChangeState(Bludgeon);
