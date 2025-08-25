@@ -8,6 +8,7 @@
             "isRanged": 0,
             "attackRange": [-50, 10, 20, 0],
 
+            "path":"Weapon/Sword",
             "title": "검",
             "description": ["적을 벨 수 있는 검이다."],
             "attackType": "참격"
@@ -19,6 +20,7 @@
             "isRanged": 0,
             "attackRange": [-70, 10, 40, 0],
 
+            "path":"Weapon/Hammer",
             "title": "망치",
             "description": ["휘둘러서 적을 타격하는 망치다."],
             "attackType": "타격"
@@ -30,6 +32,7 @@
             "isRanged": 0,
             "attackRange": [-100, 10, 30, 0],
 
+            "path":"Weapon/Spear",
             "title": "창",
             "description": ["적을 찔러 관통하는 창이다."],
             "attackType": "관통"
@@ -41,6 +44,7 @@
             "isRanged": 1,
             "attackRange": [-40, 10, 20, 0],
 
+            "path":"Weapon/Crossbow",
             "title": "쇠뇌",
             "description": ["적을 관통하는 화살을 발사하는 쇠뇌다.", "화살을 모두 사용하면 쇠뇌를 휘둘러 공격하자."],
             "attackType": "관통"
@@ -52,6 +56,7 @@
             "isRanged": 1,
             "attackRange": [-50, 10, 20, 0],
 
+            "path":"Weapon/FireStaff",
             "title": "화염 지팡이",
             "description": ["화염구를 발사할 수 있는 지팡이다.", "저장된 마법을 모두 사용하면 지팡이를 휘둘러 공격하자."],
             "attackType": "화염"
@@ -63,6 +68,7 @@
             "isRanged": 1,
             "attackRange": [-50, 10, 20, 0],
 
+            "path":"Weapon/IceStaff",
             "title": "얼음 지팡이",
             "description": ["얼음 구체를 발사할 수 있는 지팡이다.", "저장된 마법을 모두 사용하면 지팡이를 휘둘러 공격하자."],
             "attackType": "얼음"

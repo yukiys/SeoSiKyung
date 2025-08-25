@@ -10,7 +10,8 @@ namespace DataSet
         public int maxDurability;
         public bool isRanged;
         public List<float> attackRange;
-    
+
+        public string path;
         public string title;
         public string description;
         public string attackType;

@@ -1,14 +1,16 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using DataSet;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public List<DataSet.EnemyData> enemyDataList = new List<DataSet.EnemyData>();
-    public List<DataSet.WeaponData> weaponDataList = new List<DataSet.WeaponData>();
+    public List<EnemyData> enemyDataList = new List<EnemyData>();
+    public List<WeaponData> weaponDataList = new List<WeaponData>();
 
-    public int maxHealth=5;
-    public int health=5;
+    public int maxHealth = 5;
+    public int health = 5;
     public Player player;
 
     void Awake()
@@ -16,7 +18,7 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    public DataSet.EnemyData GetEnemyData(string enemyName)
+    public EnemyData GetEnemyData(string enemyName)
     {
         return enemyDataList.Find(e => e.enemyName == enemyName);
     }

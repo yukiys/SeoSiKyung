@@ -4,7 +4,7 @@ using DataSet;
 
 public class DataManager : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
         LoadEnemyData(Path.Combine(Application.dataPath, "DataSet/EnemyData.json"));
         LoadWeaponData(Path.Combine(Application.dataPath, "DataSet/WeaponData.json"));
