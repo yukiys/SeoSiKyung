@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Jump_Player : PlayerState
@@ -13,13 +14,6 @@ public class Jump_Player : PlayerState
     public override void Tick()
     {   
          if (player.attackDown && player.OnCooltime()) { fsm.ChangeState(player.attack); return; }
-
-        // 가변 점프: 키 떼면 상승 감쇠
-        if (player.jumpUp && rb.linearVelocity.y > 0f)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
-        }
-
         // 공중에서 더블 점프
         if (player.jumpCount < player.maxJumps && player.jumpDown)
         {
@@ -36,9 +30,12 @@ public class Jump_Player : PlayerState
 
     public override void FixedTick()
     {
+        Debug.Log("jump");
         // 공중 제어
         var v = rb.linearVelocity;
-        v.x = player.inputX * player.moveSpeed;
+        v.x += player.inputX * player.moveSpeed*0.01f;
+        if (v.x > player.moveSpeed)
+            v.x = player.inputX * player.moveSpeed;
         rb.linearVelocity = v;
     }
 }
