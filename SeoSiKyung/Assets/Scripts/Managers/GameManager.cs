@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
     {
         return enemyDataList.Find(e => e.enemyName == enemyName);
     }
+    public WeaponData GetWeaponData(string weaponName)
+    {
+        return weaponDataList.Find(e => e.weaponName == weaponName);
+    }
 
     public void HealthDown()
     {

@@ -105,11 +105,12 @@ public class Enemy : MonoBehaviour
         PatrolState = new Patrol_Enemy(this, fsm);
         TraceState = new Trace_Enemy(this, fsm);
         AttackState = new Attack_Enemy(this, fsm);
+        
+        GetEnemyData(enemyName);
     }
 
     void Start()
     {
-        GetEnemyData(enemyName);
         fsm.Initialize(SleepState);
     }
 
