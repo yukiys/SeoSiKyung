@@ -1,24 +1,27 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class EnemyHpUI : MonoBehaviour
 {
+    
     [Header("Sprites")]
     public Sprite backSprite;
     public Sprite fillSprite;
 
     [Header("Layout")]
     public float offsetY;
-    public float w = 0.5f;
-    public float h = 0.26f;
-    public float gap = 0.1f;
-    public float padding = 0.15f;
+    public int pixelW = 20;
+    public int pixelH = 5;
+    public int pixelGap = 2;
+    public int pixelPadidng = 3;
 
     [Header("Color")]
     private Color fillColor = Color.red;
-    private Color emptyColor = new Color(1, 1, 1, 0.25f);
+    private Color emptyColor = new Color(0.25f, 0, 0, 1);
 
     private Enemy enemy;
     private Canvas canvas;
@@ -41,7 +44,7 @@ public class EnemyHpUI : MonoBehaviour
 
     void Start()
     {
-        maxHp = GameManager.instance.GetEnemyData(enemy.enemyName).maxHp;
+        maxHp = enemy.maxHp;
         BuildBackGround();
         BuildSegments(maxHp);
         UpdateBar();
@@ -79,6 +82,14 @@ public class EnemyHpUI : MonoBehaviour
         content.localScale = Vector3.one;
 
         segments.Clear();
+
+        var scalar = canvas.GetComponent<CanvasScaler>();
+        float rppu = scalar.referencePixelsPerUnit;
+        float U = 1f / rppu;
+        float w = pixelW * U;
+        float h = pixelH * U;
+        float gap = pixelGap * U;
+        float padding = pixelPadidng * U;
 
         float totalFillWidth = maxHp * w + (maxHp - 1) * gap;
         float totalWidth = totalFillWidth + padding * 2f;
@@ -120,10 +131,6 @@ public class EnemyHpUI : MonoBehaviour
         cachedHp = cur;
 
         for (int i = 0; i < maxHp; i++)
-        {
-            var seg = segments[i];
-
-            seg.color = i < cur ? fillColor : emptyColor;
-        }
+            segments[i].color = i >= cur ? emptyColor : fillColor;
     }
 }
