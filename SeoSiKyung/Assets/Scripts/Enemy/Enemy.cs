@@ -148,9 +148,9 @@ public class Enemy : MonoBehaviour
     public void OnHit(AttackType type)
     {
         if (isDying) return;
-        if (fsm.CurrentState==SleepState && IsResisted(type))
+        if (IsResisted(type))
         {
-            fsm.ChangeState(AwakeState);
+            if (fsm.CurrentState == SleepState) fsm.ChangeState(AwakeState);
             return;
         }
 

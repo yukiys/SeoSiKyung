@@ -24,9 +24,31 @@
             "gimmick": ["타격: 산산조각 나 사라진다.","관통: 잔해가 남아 밟고 올라갈 수 있다."]
         },
         {
+            "enemyName": "Mimic",
+            "resistances": ["Fire","Ice"],
+            "maxHp": 3,
+            "speed": 3,
+            
+            "groundCheckDistance": 2,
+            "wallCheckDistance": 2,
+            "detectRange": 7,
+            "attackRange": 5,
+            
+            "isRanged": 0,
+            "attackArea": [6.75, -3.5, 10, 4],
+            
+            "idlewalk": 1,
+            
+            "title": "미믹",
+            "description": ["미믹이 고양이인 척 하고 있다."],
+            "location": "튜토리얼",
+            "gimmickNumber": 6,
+            "gimmick": ["참격: 죽는다.","타격: 산산조각 나 사라진다.","관통: 잔해가 남아 밟고 올라갈 수 있다."]
+        },
+        {
             "name":"Slime",
             "maxHP":2,
-            "resistances":["Bludgeon"]
+            "resistances":[]
         },
         {
             "name":"Goblin",

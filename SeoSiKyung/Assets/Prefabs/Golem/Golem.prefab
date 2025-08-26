@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5247088673216857602}
   m_Layer: 0
   m_Name: Golem
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8793639957104055765, guid: 67b330374ac54e54993cc1bc2c4834ee, type: 3}
+  m_Sprite: {fileID: 4225597641596277017, guid: 8c11e1a426a49824bbc077c0b833c3d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

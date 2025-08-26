@@ -21,5 +21,15 @@ public class Test : MonoBehaviour
             Debug.Log("PIERCE");
             enemy.OnHit(AttackType.Pierce);
         }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("FIRE");
+            enemy.OnHit(AttackType.Fire);
+        }
+        else if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("ICE");
+            enemy.OnHit(AttackType.Ice);
+        }
     }
 }
