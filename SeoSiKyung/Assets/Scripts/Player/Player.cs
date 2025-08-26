@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using DataSet;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
@@ -21,7 +24,8 @@ public class Player : MonoBehaviour
     public GameObject fbobject;
     [Header("Cooldown")]
     public float fbCooltime;
-
+    public Vector2 boxCastSize = new Vector2(0.4f,0.05f);
+    public float boxCastMaxDistance = 0.7f;
     float Curtime;
     // 데드존
     public const float INPUT_EPS = 0.05f;
@@ -31,13 +35,13 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     Collider2D col;
 
-    // 입력/상태 공유
+    // 숨기기
     [HideInInspector] public float inputX;
     [HideInInspector] public bool attackDown;
     [HideInInspector] public bool  jumpDown, jumpUp;
     [HideInInspector] public bool  grounded;
-    [HideInInspector] public int   jumpCount;
-    [HideInInspector] public int   CurWp;
+                     public int   jumpCount;
+    [HideInInspector] public List<WeaponData> selectedWeapon;
 
     // FSM
     public PlayerFSM fsm { get; private set; }
@@ -68,41 +72,50 @@ public class Player : MonoBehaviour
     {
         inputX = Input.GetAxisRaw("Horizontal");
         jumpDown = Input.GetKeyDown(KeyCode.Space);
-        jumpUp = Input.GetKeyUp(KeyCode.Space);
         attackDown = Input.GetKeyDown(KeyCode.LeftControl);
         if (sr != null && Mathf.Abs(inputX) > 0.001f) sr.flipX = inputX < 0;
         timereading();
+        checkgrounded();
         fsm.Tick();
         jumpDown = false;
         attackDown = false; // 일회성 입력 리셋
     }
 
+    
     void FixedUpdate()
     {
         fsm.FixedTick();
     }
-
-     void OnCollisionEnter2D(Collision2D collision)
+    public void checkgrounded()
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position,boxCastSize, 0f, Vector2.down, boxCastMaxDistance, LayerMask.GetMask("Ground"));
+        if (raycastHit.collider != null)
         {
             grounded = true;
             jumpCount = 0;
         }
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
+        else
             grounded = false;
+    }
+    void OnDrawGizmos()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position, boxCastSize, 0f, Vector2.down, boxCastMaxDistance, LayerMask.GetMask("Ground"));
+
+        Gizmos.color = Color.red;
+        if (raycastHit.collider != null)
+        {
+            Gizmos.DrawRay(transform.position, Vector2.down * raycastHit.distance);
+            Gizmos.DrawWireCube(transform.position + Vector3.down * raycastHit.distance, boxCastSize);
+        }
+        else
+        {
+            Gizmos.DrawRay(transform.position, Vector2.down * boxCastMaxDistance);
         }
     }
     public void DoJump()
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        if (!grounded) jumpCount = maxJumps;
-        else jumpCount++;
+        jumpCount++;
     }
     public void timereading()
     {
