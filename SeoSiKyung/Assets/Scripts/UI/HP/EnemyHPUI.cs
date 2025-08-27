@@ -14,10 +14,10 @@ public class EnemyHpUI : MonoBehaviour
 
     [Header("Layout")]
     public float offsetY;
-    public int pixelW = 20;
-    public int pixelH = 5;
-    public int pixelGap = 2;
-    public int pixelPadidng = 3;
+    public int pixelW = 25;
+    public int pixelH = 10;
+    public int pixelGap = 3;
+    public int pixelPadidng = 4;
 
     [Header("Color")]
     private Color fillColor = Color.red;

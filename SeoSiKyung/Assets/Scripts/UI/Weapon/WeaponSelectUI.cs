@@ -30,7 +30,7 @@ public class WeaponSelectUI : MonoBehaviour
     private Dictionary<string, Sprite> weaponSprites;
 
     private int curWeapon = 1;
-    private int prevWeapon = 1;
+    private int prevWeapon = 0;
 
     void Awake()
     {
@@ -40,7 +40,7 @@ public class WeaponSelectUI : MonoBehaviour
         rt.anchorMax = new Vector2(0f, 1f);
         rt.pivot = new Vector2(0f, 1f);
         rt.anchoredPosition = new Vector2(padding.x, -padding.y);
-        
+
         weaponSprites = new Dictionary<string, Sprite>
         {
             { "Sword", sword },
@@ -51,6 +51,7 @@ public class WeaponSelectUI : MonoBehaviour
             { "IceStaff", icestaff }
         };
     }
+
     void Start()
     {
         BuildBackground();
@@ -64,21 +65,23 @@ public class WeaponSelectUI : MonoBehaviour
         }
     }
 
-
     public void ChangeWeapon(int num)
     {
         curWeapon = num;
-        if (prevWeapon != curWeapon)
+
+        if (prevWeapon != 0 && prevWeapon != curWeapon)
         {
             weaponUI[prevWeapon - 1, 0].GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
             weaponUI[prevWeapon - 1, 1].GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
-            weaponUI[curWeapon - 1, 0].GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
-            weaponUI[curWeapon - 1, 1].GetComponent<Image>().color = new Color(1, 1, 1, 1f);
-            prevWeapon = curWeapon;
         }
+
+        weaponUI[curWeapon - 1, 0].GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+        weaponUI[curWeapon - 1, 1].GetComponent<Image>().color = new Color(1, 1, 1, 1f);
+
+        GameManager.instance.curWeaponIdx = curWeapon - 1;
+        
+        prevWeapon = curWeapon;
     }
-    
-    
     
     void BuildBackground()
     {

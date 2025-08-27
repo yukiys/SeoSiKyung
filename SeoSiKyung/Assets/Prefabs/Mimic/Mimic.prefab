@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8892934373611389056}
   - component: {fileID: 3228230937125914433}
   - component: {fileID: 6878556723306930763}
-  - component: {fileID: 523889448431279627}
+  - component: {fileID: 7684671177505301482}
   m_Layer: 0
   m_Name: EnemyHPUI
   m_TagString: Untagged
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &523889448431279627
+--- !u!114 &7684671177505301482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,13 +114,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a2ab4ef08dbf440a1a244b84782ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backSprite: {fileID: 2746901482166599517, guid: 2cee94f41e1d96341a965a0fedf5cb4a, type: 3}
-  fillSprite: {fileID: -562423885628969879, guid: 85336797f9a8e1844a18fb55b9f3161f, type: 3}
+  backSprite: {fileID: -4896707147557875713, guid: 431d7edb70469424aaf5a680b5a03405, type: 3}
+  fillSprite: {fileID: 5795091025451059996, guid: 112ad0a5aaceb1447bee08cbd9d303e8, type: 3}
   offsetY: 2
-  w: 0.5
-  h: 0.26
-  gap: 0.1
-  padding: 0.15
+  pixelW: 25
+  pixelH: 10
+  pixelGap: 3
+  pixelPadidng: 4
 --- !u!1 &3602524802365490961
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +328,7 @@ Animator:
   m_GameObject: {fileID: 9161814278387909106}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d310c42d1f325854fb4728a2fcc36bc6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

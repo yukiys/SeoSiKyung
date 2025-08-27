@@ -24,28 +24,15 @@ public class Test : MonoBehaviour
             Debug.Log("PIERCE");
             enemy.OnHit(AttackType.Pierce);
         }
-        
-        else if (Input.GetKeyDown(KeyCode.F))
+        else if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("Select");
-            List<WeaponData> selected = new List<WeaponData>(new WeaponData[3]);
-            selected[0] = GameManager.instance.GetWeaponData("Sword");
-            selected[1] = GameManager.instance.GetWeaponData("IceStaff");
-            selected[2] = GameManager.instance.GetWeaponData("Hammer");
-            ui.SetWeaponList(selected);
-            ui.BuildWeapons();
+            Debug.Log("FIRE");
+            enemy.OnHit(AttackType.Fire);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        else if (Input.GetKeyDown(KeyCode.T))
         {
-            ui.ChangeWeapon(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ui.ChangeWeapon(2);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ui.ChangeWeapon(3);
+            Debug.Log("ICE");
+            enemy.OnHit(AttackType.Ice);
         }
     }
 }
