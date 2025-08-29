@@ -1,0 +1,65 @@
+using UnityEngine;
+
+public class GoHome_Enemy : EnemyState
+{
+    float arriveDist = 0.1f;
+
+    public GoHome_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        enemy.rd.linearVelocity = Vector2.zero;
+
+        AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
+        if (enemy.idlewalk)
+        {
+            if (!info.IsName("idle") && !info.IsName("walk"))
+                enemy.anim.Play("idle");
+        }
+        else
+        {
+            if (!info.IsName("idle"))
+                enemy.anim.Play("idle");
+        }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        float dx = enemy.spawnPos.x - enemy.transform.position.x;
+
+        if (Mathf.Abs(dx) <= arriveDist)
+        {
+            enemy.rd.linearVelocity = Vector2.zero;
+            enemy.transform.position = enemy.spawnPos;
+            return;
+        }
+
+        int dir = dx > 0 ? 1 : -1;
+        if (!enemy.GroundAhead(dir) || enemy.WallAhead(dir))
+        {
+            enemy.rd.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        enemy.rd.linearVelocity = new Vector2(dir * enemy.speed, 0);
+        enemy.sr.flipX = dir > 0;
+    }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
+        if (enemy.InDetectRange() && CanLeave())
+        {
+            fsm.ChangeState(enemy.pattern == "Return" ? enemy.ReturnState : enemy.TraceState);
+            return;
+        }
+
+        if (Vector2.Distance(enemy.transform.position, enemy.spawnPos) <= 0.11f && CanLeave())
+        {
+            fsm.ChangeState(enemy.pattern=="Patrol" ? enemy.PatrolState : enemy.IdleState);
+        }
+    }
+}

@@ -38,11 +38,19 @@ public class Idle_Enemy : EnemyState
         }
         if (enemy.InDetectRange() && CanLeave())
         {
-            fsm.ChangeState(enemy.TraceState);
+            fsm.ChangeState(enemy.GetEnemyPattern());
             return;
         }
 
         timer -= Time.deltaTime;
-        if (timer <= 0f && CanLeave()) fsm.ChangeState(enemy.PatrolState);
+        if (timer <= 0f && CanLeave())
+        {
+            if (enemy.pattern == "Patrol")
+                fsm.ChangeState(enemy.PatrolState);
+            else if (enemy.pattern == "Chase")
+                fsm.ChangeState(enemy.ChaseState);
+            else if(enemy.pattern=="Return")
+                timer = Random.Range(idleMin, idleMax);
+        }
     }
 }

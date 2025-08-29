@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 32
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a2ab4ef08dbf440a1a244b84782ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backSprite: {fileID: -4896707147557875713, guid: 431d7edb70469424aaf5a680b5a03405, type: 3}
-  fillSprite: {fileID: 5795091025451059996, guid: 112ad0a5aaceb1447bee08cbd9d303e8, type: 3}
+  backSprite: {fileID: 2746901482166599517, guid: 2cee94f41e1d96341a965a0fedf5cb4a, type: 3}
+  fillSprite: {fileID: -562423885628969879, guid: 85336797f9a8e1844a18fb55b9f3161f, type: 3}
   offsetY: 2
   pixelW: 25
   pixelH: 10
@@ -161,14 +161,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9212515470449444560}
+  - component: {fileID: 5115905138806037653}
+  - component: {fileID: 2048938662975041393}
   - component: {fileID: 8282769198709696334}
   - component: {fileID: 8196173668136646887}
   - component: {fileID: 5068446599530752967}
-  - component: {fileID: 2048938662975041393}
-  - component: {fileID: 5115905138806037653}
   m_Layer: 0
   m_Name: Mimic
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,6 +190,76 @@ Transform:
   - {fileID: 2617908416289039755}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5115905138806037653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161814278387909106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3931384f59851b5429e41519f3100f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: Mimic
+  resistances: []
+  maxHp: 0
+  Hp: 0
+  speed: 0
+  jumpPower: 0
+  groundCheckDistance: 0
+  wallCheckDistance: 0
+  detectRange: 0
+  attackRange: 0
+  isRanged: 0
+  attackArea: []
+  idlewalk: 0
+  pattern: 
+  groundCheck: {fileID: 4575661996876915334}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 64
+  SlashCorpse: {fileID: 0}
+  BludgeonCorpse: {fileID: 0}
+  PierceCorpse: {fileID: 0}
+  FireCorpse: {fileID: 0}
+  IceCorpse: {fileID: 0}
+  spawnPos: {x: 0, y: 0}
+  isDying: 0
+  rd: {fileID: 0}
+  sr: {fileID: 0}
+  cd: {fileID: 0}
+  anim: {fileID: 0}
+  player: {fileID: 0}
+--- !u!95 &2048938662975041393
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161814278387909106}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d310c42d1f325854fb4728a2fcc36bc6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &8282769198709696334
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -318,70 +388,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.2287402, y: 1.0594826}
   m_EdgeRadius: 0
---- !u!95 &2048938662975041393
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9161814278387909106}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d310c42d1f325854fb4728a2fcc36bc6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5115905138806037653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9161814278387909106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3931384f59851b5429e41519f3100f81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyName: Mimic
-  resistances: []
-  maxHp: 0
-  Hp: 0
-  speed: 0
-  groundCheckDistance: 0
-  wallCheckDistance: 0
-  detectRange: 0
-  attackRange: 0
-  isRanged: 0
-  attackArea: []
-  idlewalk: 0
-  groundCheck: {fileID: 4575661996876915334}
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 64
-  SlashCorpse: {fileID: 0}
-  BludgeonCorpse: {fileID: 0}
-  PierceCorpse: {fileID: 0}
-  FireCorpse: {fileID: 0}
-  IceCorpse: {fileID: 0}
-  isDying: 0
-  rd: {fileID: 0}
-  sr: {fileID: 0}
-  cd: {fileID: 0}
-  anim: {fileID: 0}
-  player: {fileID: 0}

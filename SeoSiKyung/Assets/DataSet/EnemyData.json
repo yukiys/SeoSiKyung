@@ -6,6 +6,7 @@
             "resistances": ["Slash","Fire","Ice"],
             "maxHp": 5,
             "speed": 2,
+            "jumpPower":20,
             
             "groundCheckDistance": 3,
             "wallCheckDistance": 3,
@@ -13,9 +14,10 @@
             "attackRange": 6,
             
             "isRanged": 0,
-            "attackArea": [6.75, -3.5, 10, 4],
+            "attackArea": [6.9, -2, 10, 1.8],
             
-            "idlewalk": 1,
+            "idlewalk": 0,
+            "pattern": "Chase",
             
             "title": "초기형 골렘",
             "description": ["골렘의 기본 형태"],
@@ -28,6 +30,7 @@
             "resistances": ["Fire","Ice"],
             "maxHp": 3,
             "speed": 3,
+            "jumpPower":0,
             
             "groundCheckDistance": 2,
             "wallCheckDistance": 2,
@@ -37,7 +40,8 @@
             "isRanged": 0,
             "attackArea": [6.75, -3.5, 10, 4],
             
-            "idlewalk": 1,
+            "idlewalk": 3,
+            "pattern": "Return",
             
             "title": "미믹",
             "description": ["미믹이 고양이인 척 하고 있다."],

@@ -9,13 +9,18 @@ namespace DataSet
         public List<string> resistances;
         public int maxHp;
         public float speed;
+        public float jumpPower;
+
         public float groundCheckDistance;
         public float wallCheckDistance;
         public float detectRange;
         public float attackRange;
+
         public bool isRanged;
         public List<float> attackArea;
+        
         public bool idlewalk;
+        public string pattern;
     
         public string title;
         public string description;
@@ -29,5 +34,4 @@ namespace DataSet
     {
         public List<EnemyData> enemies;
     }
-    
 }
