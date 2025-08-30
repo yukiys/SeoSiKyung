@@ -18,7 +18,7 @@ public class Idle_Player : PlayerState
         if (player.jumpCount < player.maxJumps && player.jumpDown)
         { fsm.ChangeState(player.jump); }
         if (player.attackDown && player.OnCooltime()) { fsm.ChangeState(player.attack); return; }
-
+        if (player.OneDown ||player.TwoDown||player.ThreeDown) { fsm.ChangeState(player.Change); return; }
     }
 
     public override void FixedTick()

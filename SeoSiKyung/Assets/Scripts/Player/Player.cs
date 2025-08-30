@@ -6,55 +6,67 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class Player : MonoBehaviour
 {
-    [Header("Move / Jump")]
+    #region  ---- Player Data ----
+    [Header("Stats")]
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
-    public int   maxJumps  = 2;
+    public int maxJumps = 2;
+
+    [Header("Combat")]
     public float fireForce = 10f;
 
-    [Header("Ground Check")]
-    public LayerMask groundMask;
-    [Range(0.01f, 0.2f)] public float groundProbeHeight = 0.06f;
-    [Range(0.5f, 1f)]   public float groundProbeWidthRatio = 0.9f;
+    [Header("Senses")]
+    public float groundCheckDistance = 0.06f;
+    public float wallCheckDistance = 0.06f;
 
-    [Header("Optional")]
-    public Animator animator;
-    public SpriteRenderer sr;
-    [Header("Object")]
+    [Header("Mask")]
+    public LayerMask groundMask;
+    #endregion
+
+    #region ---- Runtime State & Components ----
+    [Header("Projectile")]
     public GameObject fbobject;
-    [Header("Cooldown")]
     public float fbCooltime;
-    public Vector2 boxCastSize = new Vector2(0.4f,0.05f);
-    public float boxCastMaxDistance = 0.7f;
-    float Curtime;
-    // 데드존
+    
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public SpriteRenderer sr;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Collider2D col;
+
     public const float INPUT_EPS = 0.05f;
     public const float SPEED_EPS = 0.05f;
 
-    // 컴포넌트
-    public Rigidbody2D rb { get; private set; }
-    Collider2D col;
-
-    // 숨기기
     [HideInInspector] public float inputX;
     [HideInInspector] public bool attackDown;
     [HideInInspector] public bool  jumpDown, jumpUp;
+    [HideInInspector] public bool OneDown, TwoDown, ThreeDown;
     [HideInInspector] public bool  grounded;
-                     public int   jumpCount;
+    public float delayTime, playerdelay;
+    public int jumpCount;
+
+    public Vector2 boxCastSize = new Vector2(0.4f,0.05f);
+    public float boxCastMaxDistance = 0.7f;
+    float Curtime;
+
     [HideInInspector] public List<WeaponData> selectedWeapon;
-
-    // FSM
-    public PlayerFSM fsm { get; private set; }
-    public Idle_Player  idle;
-    public Move_Player  move;
-    public Jump_Player  jump;
-    public Attack_Player attack;
-
+    #endregion
+     #region ---- FSM & Player States ----
+    [Header("FSM")]
+    public PlayerFSM fsm { get; set; }
+    
+    [Header("States")]
+    public Idle_Player idle { get; set; }
+    public Move_Player  move { get; set; }
+    public Jump_Player  jump { get; set; }
+    public Attack_Player attack { get; set; }
+    public ChangeWP_Player Change{ get; set; }
+    #endregion
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         if (!sr) sr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         rb.freezeRotation = true;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
@@ -64,6 +76,7 @@ public class Player : MonoBehaviour
         move = new Move_Player(this, fsm);
         jump = new Jump_Player(this, fsm);
         attack = new Attack_Player(this, fsm);
+        Change = new ChangeWP_Player(this, fsm);
     }
 
     void OnEnable() => fsm.ChangeState(idle);
@@ -73,15 +86,18 @@ public class Player : MonoBehaviour
         inputX = Input.GetAxisRaw("Horizontal");
         jumpDown = Input.GetKeyDown(KeyCode.Space);
         attackDown = Input.GetKeyDown(KeyCode.LeftControl);
+        OneDown = Input.GetKeyDown(KeyCode.Alpha1);
+        TwoDown = Input.GetKeyDown(KeyCode.Alpha2);
+        ThreeDown = Input.GetKeyDown(KeyCode.Alpha3);
         if (sr != null && Mathf.Abs(inputX) > 0.001f) sr.flipX = inputX < 0;
         timereading();
         checkgrounded();
         fsm.Tick();
         jumpDown = false;
-        attackDown = false; // 일회성 입력 리셋
+        attackDown = false;    // 일회성 입력 리셋
     }
 
-    
+
     void FixedUpdate()
     {
         fsm.FixedTick();
@@ -120,6 +136,12 @@ public class Player : MonoBehaviour
     public void timereading()
     {
         Curtime += Time.deltaTime;
+        delayTime += Time.deltaTime;
+    }
+    public bool Ondelaytime()
+    {
+        if (delayTime < playerdelay) return false;
+        else return true;
     }
     public bool OnCooltime()
     {

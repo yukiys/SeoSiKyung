@@ -1,19 +1,27 @@
 using UnityEngine;
 
-public class Attack_Player : PlayerState
+public class ChangeWP_Player : PlayerState
 {
-    public Attack_Player(Player p, PlayerFSM fsm) : base(p, fsm) { }
+    public ChangeWP_Player(Player p, PlayerFSM fsm) : base(p, fsm) { }
 
     public override void Enter()
     {
         base.Enter();
-        switch (GameManager.instance.CurWeapon)
+        if (player.OneDown)
         {
-            case("FireStaff") :
-                player.Shoot(player.fbobject);
-                break;
-            
+            GameManager.instance.ChangeWeapon(1);
         }
+        else if (player.TwoDown)
+        {
+            GameManager.instance.ChangeWeapon(2);
+        }
+        else if (player.ThreeDown)
+        {
+            GameManager.instance.ChangeWeapon(3);
+        }
+        player.OneDown = false;
+        player.TwoDown = false;
+        player.ThreeDown = false;
 
     }
     public override void Tick()
@@ -25,8 +33,6 @@ public class Attack_Player : PlayerState
         }
         else if (player.jumpCount < player.maxJumps && player.jumpDown)
         { fsm.ChangeState(player.jump); return; }
-        else if (player.OneDown ||player.TwoDown||player.ThreeDown) { fsm.ChangeState(player.Change); return; }
-
         else if (player.Ondelaytime())
         {
             fsm.ChangeState(player.idle);

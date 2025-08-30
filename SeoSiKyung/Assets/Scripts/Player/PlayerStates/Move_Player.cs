@@ -17,16 +17,20 @@ public class Move_Player : PlayerState
         { fsm.ChangeState(player.idle); return; }
 
         if (player.jumpCount < player.maxJumps && player.jumpDown)
-        { fsm.ChangeState(player.jump); }
+        { fsm.ChangeState(player.jump); return; }
         if (player.attackDown && player.OnCooltime()) { fsm.ChangeState(player.attack); return; }
+        if (player.OneDown ||player.TwoDown||player.ThreeDown) { fsm.ChangeState(player.Change); return; }
+
 
     }
 
     public override void FixedTick()
     {
-        var v = rb.linearVelocity;
-        v.x = player.inputX * player.moveSpeed;
-        rb.linearVelocity = v;
+        
+            var v = rb.linearVelocity;
+            v.x = player.inputX * player.moveSpeed;
+            rb.linearVelocity = v;
+        
     }
 
     public override void Exit()

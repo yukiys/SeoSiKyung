@@ -167,6 +167,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36c58d1ea6c60ec48ae025a7d47b33ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sword: {fileID: 0}
+  hammer: {fileID: 0}
+  spear: {fileID: 0}
+  crossbow: {fileID: 0}
+  firestaff: {fileID: 0}
+  icestaff: {fileID: 0}
+  background: {fileID: 0}
+  outline: {fileID: 0}
+  weaponCount: 3
+  pixelSize: 100
+  pixelGap: 5
+  padding: {x: 12, y: 50}
 --- !u!1 &158264285
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,6 +777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
+  ui: {fileID: 0}
 --- !u!114 &1215623160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,8 +790,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efe155fd6104504da47729b454ce138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 0}
   enemyDataList: []
   weaponDataList: []
+  selectedWeaponList: []
+  curWeaponIdx: -1
   maxHealth: 5
   health: 5
   player: {fileID: 1292558054}
@@ -886,7 +902,7 @@ Transform:
   m_GameObject: {fileID: 1292558047}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.87, y: 0.65, z: 0}
+  m_LocalPosition: {x: -5.47, y: 0.81, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1006,23 +1022,30 @@ MonoBehaviour:
   jumpForce: 15
   maxJumps: 2
   fireForce: 5
+  groundCheckDistance: 0.06
+  wallCheckDistance: 0.06
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  groundProbeHeight: 0.011
-  groundProbeWidthRatio: 0.9
-  animator: {fileID: 1292558051}
-  sr: {fileID: 0}
   fbobject: {fileID: 6030717079205536593, guid: 968e3ef2950e62245bf9af7f952db8f0, type: 3}
   fbCooltime: 1
-  boxCastSize: {x: 0.9, y: 0.05}
-  boxCastMaxDistance: 1.483
+  animator: {fileID: 1292558051}
+  sr: {fileID: 0}
+  rb: {fileID: 0}
+  col: {fileID: 0}
   inputX: 0
   attackDown: 0
   jumpDown: 0
   jumpUp: 0
+  OneDown: 0
+  TwoDown: 0
+  ThreeDown: 0
   grounded: 0
+  delayTime: 0
+  playerdelay: 0
   jumpCount: 0
+  boxCastSize: {x: 1.1, y: 0.051}
+  boxCastMaxDistance: 1.483
   selectedWeapon: []
 --- !u!251 &1292558055
 PlatformEffector2D:
