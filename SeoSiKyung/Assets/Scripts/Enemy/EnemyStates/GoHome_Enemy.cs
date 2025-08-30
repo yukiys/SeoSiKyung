@@ -10,7 +10,7 @@ public class GoHome_Enemy : EnemyState
     {
         base.Enter();
 
-        enemy.rd.linearVelocity = Vector2.zero;
+        enemy.rb.linearVelocity = Vector2.zero;
 
         AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
         if (enemy.idlewalk)
@@ -31,7 +31,7 @@ public class GoHome_Enemy : EnemyState
 
         if (Mathf.Abs(dx) <= arriveDist)
         {
-            enemy.rd.linearVelocity = Vector2.zero;
+            enemy.rb.linearVelocity = Vector2.zero;
             enemy.transform.position = enemy.spawnPos;
             return;
         }
@@ -39,11 +39,11 @@ public class GoHome_Enemy : EnemyState
         int dir = dx > 0 ? 1 : -1;
         if (!enemy.GroundAhead(dir) || enemy.WallAhead(dir))
         {
-            enemy.rd.linearVelocity = Vector2.zero;
+            enemy.rb.linearVelocity = Vector2.zero;
             return;
         }
 
-        enemy.rd.linearVelocity = new Vector2(dir * enemy.speed, 0);
+        enemy.rb.linearVelocity = new Vector2(dir * enemy.speed, 0);
         enemy.sr.flipX = dir > 0;
     }
 

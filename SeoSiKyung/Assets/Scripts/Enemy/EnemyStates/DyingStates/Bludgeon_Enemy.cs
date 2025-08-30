@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Fire_Enemy : EnemyState
+public class Bludgeon_Enemy : EnemyState
 {
-    public Fire_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+    public Bludgeon_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {
         enemy.isDying = true;
-        enemy.rd.linearVelocity = Vector2.zero;
-        enemy.anim.Play("fire");
+        enemy.rb.linearVelocity = Vector2.zero;
+        enemy.anim.Play("bludgeon");
     }
 
     public override void LogicUpdate()

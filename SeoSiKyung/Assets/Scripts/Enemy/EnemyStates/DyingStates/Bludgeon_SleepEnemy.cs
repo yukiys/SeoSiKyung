@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Fire_SleepEnemy : EnemyState
+public class Bludgeon_SleepEnemy : EnemyState
 {
-    public Fire_SleepEnemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+    public Bludgeon_SleepEnemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {
         enemy.isDying = true;
-        enemy.rd.linearVelocity = Vector2.zero;
-        enemy.anim.Play("fire_sleep");
+        enemy.rb.linearVelocity = Vector2.zero;
+        enemy.anim.Play("bludgeon_sleep");
     }
 
     public override void LogicUpdate()

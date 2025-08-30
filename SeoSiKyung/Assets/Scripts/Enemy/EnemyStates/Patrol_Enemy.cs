@@ -40,7 +40,7 @@ public class Patrol_Enemy : EnemyState
             enemy.sr.flipX = dir > 0;
         }
 
-        enemy.rd.linearVelocity = new Vector2(dir * enemy.speed, 0);
+        enemy.rb.linearVelocity = new Vector2(dir * enemy.speed, 0);
     }
 
     public override void LogicUpdate()

@@ -10,7 +10,7 @@ public class Idle_Enemy : EnemyState
     {
         base.Enter();
 
-        enemy.rd.linearVelocity = Vector2.zero;
+        enemy.rb.linearVelocity = Vector2.zero;
         
         AnimatorStateInfo info = enemy.anim.GetCurrentAnimatorStateInfo(0);
         if (enemy.idlewalk)

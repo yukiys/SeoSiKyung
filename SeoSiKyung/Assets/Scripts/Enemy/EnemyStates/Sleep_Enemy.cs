@@ -6,7 +6,7 @@ public class Sleep_Enemy : EnemyState
 
     public override void Enter()
     {
-        enemy.rd.linearVelocity = Vector2.zero;
+        enemy.rb.linearVelocity = Vector2.zero;
         enemy.anim.Play("Sleep");
     }
 }

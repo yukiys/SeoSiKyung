@@ -23,11 +23,12 @@
             "description": ["골렘의 기본 형태"],
             "location": "튜토리얼",
             "gimmickNumber": 6,
-            "gimmick": ["타격: 산산조각 나 사라진다.","관통: 잔해가 남아 밟고 올라갈 수 있다."]
+            "gimmick": ["타격: 산산조각 나 사라진다.",
+                        "관통: 잔해가 남아 밟고 올라갈 수 있다."]
         },
         {
             "enemyName": "Mimic",
-            "resistances": ["Fire","Ice"],
+            "resistances": ["Bludgeon","Pierce"],
             "maxHp": 3,
             "speed": 3,
             "jumpPower":0,
@@ -46,8 +47,10 @@
             "title": "미믹",
             "description": ["미믹이 고양이인 척 하고 있다."],
             "location": "튜토리얼",
-            "gimmickNumber": 6,
-            "gimmick": ["참격: 죽는다.","타격: 산산조각 나 사라진다.","관통: 잔해가 남아 밟고 올라갈 수 있다."]
+            "gimmickNumber": 25,
+            "gimmick": ["참격: 상자가 베어지고, 미믹은 아이템을 두고 도망간다.",
+                        "불: 상자가 불에타고, 미믹은 아이템을 두고 도망간다.",
+                        "얼음: 미믹이 얼어서 밟고 올라갈 수 있다."]
         },
         {
             "name":"Slime",

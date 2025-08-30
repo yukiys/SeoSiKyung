@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Ice_Enemy : EnemyState
+public class Fire_SleepEnemy : EnemyState
 {
-    public Ice_Enemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
+    public Fire_SleepEnemy(Enemy enemy, EnemyFSM fsm) : base(enemy, fsm) { }
 
     public override void Enter()
     {
         enemy.isDying = true;
-        enemy.rd.linearVelocity = Vector2.zero;
-        enemy.anim.Play("ice");
+        enemy.rb.linearVelocity = Vector2.zero;
+        enemy.anim.Play("fire_sleep");
     }
 
     public override void LogicUpdate()

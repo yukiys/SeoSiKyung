@@ -31,23 +31,28 @@ public class Chase_Enemy : EnemyState
         bool ground = enemy.GroundAhead(dir);
         bool isGrounded = enemy.IsGrounded();
 
-        if (wall && isGrounded && !enemy.RecentlyJumped())
+        if (wall && isGrounded)
         {
-            if (enemy.CanJump())
+            if (enemy.CanJump() && !enemy.RecentlyJumped())
             {
                 enemy.Jump(dir);
                 return;
             }
-            enemy.rd.linearVelocity = new Vector2(0f, enemy.rd.linearVelocity.y);
+            enemy.rb.linearVelocity = new Vector2(0f, enemy.rb.linearVelocity.y);
             return;
         }
         if (!ground && isGrounded)
         {
-            enemy.rd.linearVelocity = new Vector2(0f, enemy.rd.linearVelocity.y);
+            if (enemy.CanJump() && !enemy.RecentlyJumped())
+            {
+                enemy.Jump(dir);
+                return;
+            }
+            enemy.rb.linearVelocity = new Vector2(0f, enemy.rb.linearVelocity.y);
             return;
         }
 
-        enemy.rd.linearVelocity = new Vector2(dir * enemy.speed, enemy.rd.linearVelocity.y);
+        enemy.rb.linearVelocity = new Vector2(dir * enemy.speed, enemy.rb.linearVelocity.y);
         enemy.sr.flipX = dir > 0;
     }
 

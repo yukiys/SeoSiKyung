@@ -31,11 +31,11 @@ public class Return_enemy : EnemyState
 
         if (!enemy.GroundAhead(dir) || enemy.WallAhead(dir))
         {
-            enemy.rd.linearVelocity = Vector2.zero;
+            enemy.rb.linearVelocity = Vector2.zero;
             return;
         }
 
-        enemy.rd.linearVelocity = new Vector2(dir * enemy.speed, 0);
+        enemy.rb.linearVelocity = new Vector2(dir * enemy.speed, 0);
         enemy.sr.flipX = dir > 0;
     }
 

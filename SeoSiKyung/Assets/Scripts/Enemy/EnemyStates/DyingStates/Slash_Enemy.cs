@@ -9,7 +9,7 @@ public class Slash_Enemy : EnemyState
     public override void Enter()
     {
         enemy.isDying = true;
-        enemy.rd.linearVelocity = Vector2.zero;
+        enemy.rb.linearVelocity = Vector2.zero;
         enemy.anim.Play("slash");
         t = duration;
     }

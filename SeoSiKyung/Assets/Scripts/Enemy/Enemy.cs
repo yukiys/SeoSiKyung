@@ -2,10 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.DataSet;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
     #region ---- Enemy Data ----
@@ -62,7 +60,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public Vector2 spawnPos;
     [HideInInspector] public bool isDying = false;
 
-    [HideInInspector] public Rigidbody2D rd;
+    [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public SpriteRenderer sr;
     [HideInInspector] public Collider2D cd;
     [HideInInspector] public Animator anim;
@@ -102,7 +100,8 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         spawnPos = transform.position;
-        rd = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        rb.freezeRotation = true;
         sr = GetComponent<SpriteRenderer>();
         cd = GetComponent<Collider2D>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -225,7 +224,7 @@ public class Enemy : MonoBehaviour
 
     public bool IsGrounded()
     {
-        int count = rd.Cast(Vector2.down, groundFilter, castHits, skin);
+        int count = rb.Cast(Vector2.down, groundFilter, castHits, skin);
         for (int i = 0; i < count; i++)
             if (castHits[i].normal.y > 0.5f) return true;
 
@@ -233,7 +232,7 @@ public class Enemy : MonoBehaviour
     }
     public bool IsHeadClear()
     {
-        int count = rd.Cast(Vector2.up, groundFilter, castHits, headCheckDistance);
+        int count = rb.Cast(Vector2.up, groundFilter, castHits, headCheckDistance);
         return count == 0;
     }
     public bool CanJump() => (Time.time - lastJumpTime) >= jumpCoolDown && IsGrounded() && IsHeadClear() && pattern == "Chase";
@@ -242,7 +241,7 @@ public class Enemy : MonoBehaviour
     public void Jump(int dir)
     {
         lastJumpTime = Time.time;
-        rd.linearVelocity = new Vector2(2 * dir * speed, jumpPower);
+        rb.linearVelocity = new Vector2(2 * dir * speed, jumpPower);
     }
 
     public bool GroundAhead(int dir)
@@ -256,7 +255,7 @@ public class Enemy : MonoBehaviour
 
     public bool WallAhead(int dir)
     {
-        int count = rd.Cast(new Vector2(dir, 0f), wallFilter, castHits, skin);
+        int count = rb.Cast(new Vector2(dir, 0f), wallFilter, castHits, skin);
         return count > 0;
     }
 
